@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4903581308921882483}
   - component: {fileID: 4013232850439560113}
-  - component: {fileID: 2263107330981999489}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -84,14 +83,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!81 &2263107330981999489
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 818566481089775122}
-  m_Enabled: 1
 --- !u!1 &4169960234815280759
 GameObject:
   m_ObjectHideFlags: 0
@@ -103,6 +94,8 @@ GameObject:
   - component: {fileID: 5874910762655012604}
   - component: {fileID: 7343179694214107827}
   - component: {fileID: 1365879111063854213}
+  - component: {fileID: 5635405736245255819}
+  - component: {fileID: 6080760815835648350}
   m_Layer: 0
   m_Name: amogus
   m_TagString: Untagged
@@ -164,6 +157,30 @@ MonoBehaviour:
   SpawnWithObservers: 1
   DontDestroyWithOwner: 0
   AutoObjectParentSync: 1
+--- !u!114 &5635405736245255819
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4169960234815280759}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 475b20138422fa14c88519dc6ee03864, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6080760815835648350
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4169960234815280759}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3fd1ba74caf67974182ee2695e152425, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4484218246185340313
 GameObject:
   m_ObjectHideFlags: 0

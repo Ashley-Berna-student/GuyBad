@@ -7,24 +7,24 @@ public class RpcTest : NetworkBehaviour
     {
         if (!IsServer && IsOwner)
         {
-            ServerOnlyRpc(0, NetworkObjectId);
+            ServerOnlyServerRpc(0, NetworkObjectId);
         }
     }
 
     [ClientRpc]
-    void ClientAndHostRpc(int value, ulong sourceNetworkObjectId)
+    void ClientAndHostClientRpc(int value, ulong sourceNetworkObjectId)
     {
         Debug.Log($"Client recieved the Rpc #{value} on NetworkObject #{sourceNetworkObjectId}");
         if (IsOwner)
         {
-            ServerOnlyRpc(value + 1, sourceNetworkObjectId);
+            ServerOnlyServerRpc(value + 1, sourceNetworkObjectId);
         }
     }
 
     [ServerRpc]
-    void ServerOnlyRpc(int value, ulong sourceNetworkObjectId)
+    void ServerOnlyServerRpc(int value, ulong sourceNetworkObjectId)
     {
         Debug.Log($"Server received the Rpc #{value} on NetworkObject #{sourceNetworkObjectId}");
-        ClientAndHostRpc(value, sourceNetworkObjectId);
+        ClientAndHostClientRpc(value, sourceNetworkObjectId);
     }
 }

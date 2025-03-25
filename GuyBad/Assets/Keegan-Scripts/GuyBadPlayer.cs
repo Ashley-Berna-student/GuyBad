@@ -18,11 +18,11 @@ namespace GuyBad
 
         public void Move()
         {
-            SubmitPositionRequestRpc();
+            SubmitPositionRequestServerRpc();
         }
 
         [ServerRpc]
-        void SubmitPositionRequestRpc()
+        void SubmitPositionRequestServerRpc()
         {
             var randPos = GetRandomPositionOnPlane();
             transform.position = randPos;
