@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 9fc0d4010bbf28b4594072e72b8655ab
-DefaultImporter:
+guid: 8553128c78ddf504697402ef578281b4
+PrefabImporter:
   externalObjects: {}
   userData: 
   assetBundleName: 
@@ -10,5 +10,5 @@ AssetOrigin:
   productId: 297797
   packageName: Wooden Double Door front handle entrance
   packageVersion: 1.0
-  assetPath: Assets/Scenes/SampleScene.unity
+  assetPath: Assets/GVOZDY/Wooden Double Door front handle entrance/Prefabs/Door_1_medium_frameless.prefab
   uploadId: 696787
