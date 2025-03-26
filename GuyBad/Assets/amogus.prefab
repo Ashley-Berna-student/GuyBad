@@ -96,9 +96,10 @@ GameObject:
   - component: {fileID: 1365879111063854213}
   - component: {fileID: 5635405736245255819}
   - component: {fileID: 6080760815835648350}
+  - component: {fileID: 8304394459644396684}
   m_Layer: 0
   m_Name: amogus
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -181,6 +182,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fd1ba74caf67974182ee2695e152425, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8304394459644396684
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4169960234815280759}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e96cb6065543e43c4a752faaa1468eb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SyncPositionX: 0
+  SyncPositionY: 0
+  SyncPositionZ: 0
+  SyncRotAngleX: 0
+  SyncRotAngleY: 0
+  SyncRotAngleZ: 0
+  SyncScaleX: 0
+  SyncScaleY: 0
+  SyncScaleZ: 0
+  PositionThreshold: 0.001
+  RotAngleThreshold: 0.01
+  ScaleThreshold: 0.01
+  UseQuaternionSynchronization: 0
+  UseQuaternionCompression: 0
+  UseHalfFloatPrecision: 0
+  InLocalSpace: 0
+  Interpolate: 1
+  SlerpPosition: 0
 --- !u!1 &4484218246185340313
 GameObject:
   m_ObjectHideFlags: 0
