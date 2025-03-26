@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 
 public class CameraMovement : MonoBehaviour
@@ -11,7 +12,6 @@ public class CameraMovement : MonoBehaviour
     [SerializeField] public float sensY;
     [SerializeField] public Transform orientation;
     private bool canRotate = true;
-
     public float rotateSpeed = 1.0f;
     // Start is called before the first frame update
     void Start()
@@ -48,7 +48,7 @@ public class CameraMovement : MonoBehaviour
         {
             rotatey += mouseX;
 
-            rotatex -= mouseY;
+            rotatex += mouseY;
             rotatex = Mathf.Clamp(rotatex, -90f, 90f);
 
             transform.rotation = Quaternion.Euler(rotatex, rotatey, 0);
