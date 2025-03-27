@@ -1,35 +1,77 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.Networking;
+using UnityEngine.UI;
 
 public class VoteCount : MonoBehaviour
 {
-    int voteint = 0;
+   private int voteint = 0;
+   private int voteNein = 0;
+    public bool isStarted;
+    public float time = 5f;
     // Start is called before the first frame update
     void Start()
     {
         
     }
-
     // Update is called once per frame
-    void Update()
+    [Rpc(SendTo.Server)]
+    public void RpcTest()
     {
-        float time = 0f;
-        time += Time.deltaTime;
-        while (Time.deltaTime <= 60)
-        {
-            if (vote)
-            {
-                voteint++;
-                Debug.Log(voteint);
-            }
-        }
-        Debug.Log("60 Seconds is Over");
         Debug.Log(voteint);
     }
-
-    public void GetVotes(bool vote)
+    void Update()
     {
-        
+        /*time -= Time.deltaTime;
+        if (Mathf.FloorToInt(time) == 30)
+        {
+            Debug.Log(voteint);
+        }*/
+        if (isStarted)
+        {
+           
+            time -= Time.deltaTime;
+            if(time >= 0)
+            { 
+                if(time % 2 == 0)
+                {
+                    RpcTest();
+                }
+            }
+            else
+            {
+                Debug.Log("60 Seconds is Over");
+                Debug.Log(voteint);
+                isStarted = false;
+            }
+        }
     }
+
+    public void GetStart(bool start)
+    {
+        if (start)
+        {
+            isStarted = true;
+        }
+        else
+        {
+            isStarted = false;
+        }
+    }
+    
+    public void GetVote(bool vote)
+    {
+        if (vote)
+        {
+            voteint++;
+        }
+        else
+        {
+            voteNein++;
+        }
+    }
+
+
 }
