@@ -48,7 +48,7 @@ public class CameraMovement : MonoBehaviour
         {
             rotatey += mouseX;
 
-            rotatex -= mouseY;
+            rotatex += mouseY;
             rotatex = Mathf.Clamp(rotatex, -90f, 90f);
 
             transform.rotation = Quaternion.Euler(rotatex, rotatey, 0);
