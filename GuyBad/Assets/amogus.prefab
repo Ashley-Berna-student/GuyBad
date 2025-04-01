@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 4903581308921882483}
   - component: {fileID: 4013232850439560113}
   m_Layer: 0
-  m_Name: Main Camera
-  m_TagString: MainCamera
+  m_Name: Player Camera
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -95,6 +95,7 @@ GameObject:
   - component: {fileID: 7343179694214107827}
   - component: {fileID: 1365879111063854213}
   - component: {fileID: 3520911303957449106}
+  - component: {fileID: 331968592651289744}
   m_Layer: 0
   m_Name: amogus
   m_TagString: Player
@@ -188,6 +189,18 @@ MonoBehaviour:
   InLocalSpace: 0
   Interpolate: 1
   SlerpPosition: 0
+--- !u!114 &331968592651289744
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4169960234815280759}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b161c4ea4ea972048bd9a5501bde4aef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4484218246185340313
 GameObject:
   m_ObjectHideFlags: 0
