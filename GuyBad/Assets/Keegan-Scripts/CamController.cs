@@ -3,34 +3,27 @@ using Unity.Netcode;
 
 public class CamController : NetworkBehaviour
 {
-    [SerializeField] private Camera playerCam;
-
-
-    private void Awake()
-    {
-        playerCam = GetComponentInChildren<Camera>(true);
-
-        Debug.Log($"[{gameObject.name}] Camera found: {playerCam != null}");
-
-        if (playerCam == null)
-        {
-            Debug.LogError("No camera found in player prefab", this);
-            return;
-        }
-    }
+    [SerializeField] private GameObject playerCam;
 
     private void Start()
     {
-        if (playerCam == null) return;
-
-        if (!IsOwner)
+        if (playerCam == null)
         {
             playerCam.gameObject.SetActive(false);
+        }
+    }
+
+
+    public override void OnNetworkSpawn()
+    {
+        if (IsOwner)
+        {
+            playerCam.gameObject.SetActive(true);
         }
 
         else
         {
-            playerCam.gameObject.SetActive(true);
+            playerCam.gameObject.SetActive(false);
         }
     }
 }
