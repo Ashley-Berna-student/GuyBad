@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4903581308921882483}
   - component: {fileID: 4013232850439560113}
-  - component: {fileID: 2263107330981999489}
   - component: {fileID: 5229585161244646972}
   m_Layer: 0
   m_Name: Camera
@@ -85,14 +84,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!1 &2178266460116481528
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 818566481089775122}
-  m_Enabled: 0
 --- !u!114 &5229585161244646972
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -117,7 +108,8 @@ GameObject:
   - component: {fileID: 5874910762655012604}
   - component: {fileID: 1377988030646156998}
   - component: {fileID: 7343179694214107827}
-  - component: {fileID: 1365879111063854213}
+  - component: {fileID: 2985399339520608752}
+  - component: {fileID: 6121204918316041289}
   m_Layer: 0
   m_Name: amogus
   m_TagString: Player
@@ -140,6 +132,8 @@ Transform:
   m_Children:
   - {fileID: 6189346613461325685}
   - {fileID: 726552525679995783}
+  - {fileID: 4325552838960911770}
+  - {fileID: 6974126664700011837}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1377988030646156998
@@ -158,7 +152,7 @@ MonoBehaviour:
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
-  ActiveSceneSynchronization: 0
+  ActiveSceneSynchronization: 1
   SceneMigrationSynchronization: 1
   SpawnWithObservers: 1
   DontDestroyWithOwner: 0
@@ -191,14 +185,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 341c8a8004ceced47b90fed2e89494dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 951099334
-  AlwaysReplicateAsRoot: 0
-  SynchronizeTransform: 1
-  ActiveSceneSynchronization: 0
-  SceneMigrationSynchronization: 1
-  SpawnWithObservers: 1
-  DontDestroyWithOwner: 0
-  AutoObjectParentSync: 1
+  playerCapsule: {fileID: 4484218246185340313}
+  playerName: Karl
+--- !u!114 &6121204918316041289
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4169960234815280759}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df2868252ab5c4d1da357e8f11f1b524, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UseUnreliableDeltas: 0
+  SyncPositionX: 1
+  SyncPositionY: 0
+  SyncPositionZ: 1
+  SyncRotAngleX: 1
+  SyncRotAngleY: 1
+  SyncRotAngleZ: 1
+  SyncScaleX: 0
+  SyncScaleY: 0
+  SyncScaleZ: 0
+  PositionThreshold: 0.001
+  RotAngleThreshold: 0.01
+  ScaleThreshold: 0.01
+  UseQuaternionSynchronization: 0
+  UseQuaternionCompression: 0
+  UseHalfFloatPrecision: 0
+  InLocalSpace: 0
+  Interpolate: 1
+  SlerpPosition: 0
 --- !u!1 &4484218246185340313
 GameObject:
   m_ObjectHideFlags: 0
