@@ -109,7 +109,9 @@ GameObject:
   - component: {fileID: 1377988030646156998}
   - component: {fileID: 7343179694214107827}
   - component: {fileID: 2985399339520608752}
-  - component: {fileID: 6121204918316041289}
+
+  - component: {fileID: 8851022452260414796}
+
   m_Layer: 0
   m_Name: amogus
   m_TagString: Player
@@ -151,7 +153,9 @@ MonoBehaviour:
   GlobalObjectIdHash: 2954362278
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
-  SynchronizeTransform: 1
+
+  SynchronizeTransform: 0
+
   ActiveSceneSynchronization: 1
   SceneMigrationSynchronization: 1
   SpawnWithObservers: 1
@@ -186,8 +190,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerCapsule: {fileID: 4484218246185340313}
-  playerName: Karl
---- !u!114 &6121204918316041289
+  playerColor: {r: 0, g: 0, b: 0, a: 0}
+  playerName: 
+--- !u!114 &8851022452260414796
+
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
