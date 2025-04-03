@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4903581308921882483}
   - component: {fileID: 4013232850439560113}
-  - component: {fileID: 2263107330981999489}
   - component: {fileID: 5229585161244646972}
   m_Layer: 0
   m_Name: Camera
@@ -85,14 +84,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!81 &2263107330981999489
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 818566481089775122}
-  m_Enabled: 0
 --- !u!114 &5229585161244646972
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -118,7 +109,9 @@ GameObject:
   - component: {fileID: 1377988030646156998}
   - component: {fileID: 7343179694214107827}
   - component: {fileID: 2985399339520608752}
+
   - component: {fileID: 8851022452260414796}
+
   m_Layer: 0
   m_Name: amogus
   m_TagString: Player
@@ -160,7 +153,9 @@ MonoBehaviour:
   GlobalObjectIdHash: 2954362278
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
+
   SynchronizeTransform: 0
+
   ActiveSceneSynchronization: 1
   SceneMigrationSynchronization: 1
   SpawnWithObservers: 1
@@ -198,6 +193,7 @@ MonoBehaviour:
   playerColor: {r: 0, g: 0, b: 0, a: 0}
   playerName: 
 --- !u!114 &8851022452260414796
+
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

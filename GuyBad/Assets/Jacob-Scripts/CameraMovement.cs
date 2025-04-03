@@ -30,8 +30,8 @@ public class CameraMovement : NetworkBehaviour
             {
                 rotatey += mouseX;
 
-                rotatex += mouseY;
-                rotatex = Mathf.Clamp(rotatex, -90f, 90f);
+            rotatex += mouseY;
+            rotatex = Mathf.Clamp(rotatex, -90f, 90f);
 
                 transform.rotation = Quaternion.Euler(rotatex, rotatey, 0);
                 orientation.rotation = Quaternion.Euler(0, rotatey, 0);
