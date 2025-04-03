@@ -118,7 +118,6 @@ GameObject:
   - component: {fileID: 1377988030646156998}
   - component: {fileID: 7343179694214107827}
   - component: {fileID: 2985399339520608752}
-  - component: {fileID: 1238334015762886585}
   - component: {fileID: 8851022452260414796}
   m_Layer: 0
   m_Name: amogus
@@ -161,8 +160,8 @@ MonoBehaviour:
   GlobalObjectIdHash: 2954362278
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
-  SynchronizeTransform: 1
-  ActiveSceneSynchronization: 0
+  SynchronizeTransform: 0
+  ActiveSceneSynchronization: 1
   SceneMigrationSynchronization: 1
   SpawnWithObservers: 1
   DontDestroyWithOwner: 0
@@ -196,19 +195,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerCapsule: {fileID: 4484218246185340313}
+  playerColor: {r: 0, g: 0, b: 0, a: 0}
   playerName: 
---- !u!114 &1238334015762886585
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4169960234815280759}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 913f5aacaa668a6479d9681c17f95022, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &8851022452260414796
 MonoBehaviour:
   m_ObjectHideFlags: 0
