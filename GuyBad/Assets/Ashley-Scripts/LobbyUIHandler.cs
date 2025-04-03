@@ -8,6 +8,7 @@ using UnityEngine.UI;
 public class LobbyUIHandler : MonoBehaviour
 {
     public UnityEngine.Camera playerCamera;
+    public GameObject[] colorObjects;
 
     void Update()
     {
@@ -27,16 +28,29 @@ public class LobbyUIHandler : MonoBehaviour
             if (Physics.Raycast(ray, out hit))
             {
                 print("raycast hit: " + hit.collider.gameObject.name);
-
-                if(gameObject.name == "turnTeal")
-                {
-                    print("YOu are now teal");
-                }
+                SetActiveColor(hit.collider.gameObject.name);
             }
             else
             {
                 print("raycast didnt hit anything");
             }
+        }
+    }
+
+    void SetActiveColor(string colorName)
+    {
+        GameObject selectedColor = System.Array.Find(colorObjects, obj => obj.name == colorName);
+
+        if (selectedColor != null)
+        {
+            foreach (GameObject obj in colorObjects)
+            {
+                obj.SetActive(obj == selectedColor);
+            }
+        }
+        else
+        {
+            print("invalid selection");
         }
     }
 }
