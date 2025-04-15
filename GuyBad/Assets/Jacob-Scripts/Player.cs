@@ -8,7 +8,8 @@ public class Player : NetworkBehaviour
     [SerializeField] public GameObject playerCapsule;
     public Color playerColor;
     public string playerName;
-    private MeshRenderer ma;
+    private MeshRenderer ma = new MeshRenderer();
+    private List<MeshRenderer> renderers = new List<MeshRenderer>();
     private bool vote = false;
     private GameObject[] players;
 
