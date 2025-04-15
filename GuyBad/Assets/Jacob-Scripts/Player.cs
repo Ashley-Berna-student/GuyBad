@@ -1,27 +1,43 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.Netcode;
 
-public class Player : MonoBehaviour
+public class Player : NetworkBehaviour
 {
-    [SerializeField] public GameObject playerCapsule; 
-    private Color playerColor;
+    [SerializeField] public GameObject playerCapsule;
+    public Color playerColor;
     public string playerName;
+    private MeshRenderer ma;
     private bool vote = false;
     private GameObject[] players;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-       Renderer ma = playerCapsule.GetComponent<MeshRenderer>();
-        playerColor = Random.ColorHSV();
-        ma.material.SetColor("_Color", playerColor);
-       //players = GameObject.FindGameObjectsWithTag("Player");
+        Initialize();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Initialize()
     {
+        if (ma == null)
+        {
+            ma = playerCapsule.GetComponent<MeshRenderer>();
+        }
+    }
+    // Start is called before the first frame update
+    public override void OnNetworkSpawn()
+    {
+        if (IsOwner)
+        {
+            Initialize();
+            playerColor = Random.ColorHSV();
+            ma.material.SetColor("_Color", playerColor);
+            //players = GameObject.FindGameObjectsWithTag("Player");
+        }
+        else
+        {
+            return;
+        }
         
     }
-}
+} 
