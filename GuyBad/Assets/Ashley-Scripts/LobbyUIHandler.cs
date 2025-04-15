@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -9,6 +10,15 @@ public class LobbyUIHandler : MonoBehaviour
 {
     public UnityEngine.Camera playerCamera;
     public GameObject[] colorObjects;
+    public GameObject clapButton;
+    public GameObject gaspButton;
+    public GameObject laughButton;
+    public AudioClip clapSound;
+    public AudioClip gaspSound;
+    public AudioClip laughSound;
+    private bool isClapping = false;
+    private bool isGasping = false;
+    private bool isLaughing = false;
 
     void Update()
     {
@@ -48,9 +58,43 @@ public class LobbyUIHandler : MonoBehaviour
                 obj.SetActive(obj == selectedColor);
             }
         }
+        if (colorName == clapButton.name)
+        {
+            isClapping = true;
+            PlaySound();
+            isClapping = false;
+        }
+        if (colorName == gaspButton.name)
+        {
+            isGasping = true;
+            PlaySound();
+            isGasping = false;
+        }
+        if (colorName == laughButton.name)
+        {
+            isLaughing = true;
+            PlaySound();
+            isLaughing = false;
+        }
         else
         {
             print("invalid selection");
+        }
+    }
+
+    public void PlaySound()
+    {
+        if (isClapping)
+        {
+            AudioSource.PlayClipAtPoint(clapSound, transform.position);
+        }
+        if (isGasping)
+        {
+            AudioSource.PlayClipAtPoint(gaspSound, transform.position);
+        }
+        if (isLaughing)
+        {
+            AudioSource.PlayClipAtPoint(laughSound, transform.position);
         }
     }
 }

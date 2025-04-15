@@ -12,6 +12,7 @@ public class OpenIDFolder : MonoBehaviour , IPointerEnterHandler, IPointerExitHa
     public float moveAmountPartyCard = 150;
     public float moveAmountIdCard = 300;
     public float moveSpeed = 0.2f;
+    public AudioClip paperRustle;
 
     private Vector2 originalPartyPos;
     private Vector2 originalIDPos;
@@ -38,6 +39,7 @@ public class OpenIDFolder : MonoBehaviour , IPointerEnterHandler, IPointerExitHa
             if (moveCoroutine != null)
             {
                 StopCoroutine(moveCoroutine);
+                PlaySound();
             }
 
             moveCoroutine = StartCoroutine(MoveCards(originalPartyPos.x - moveAmountPartyCard, originalIDPos.x - moveAmountIdCard));
@@ -53,6 +55,7 @@ public class OpenIDFolder : MonoBehaviour , IPointerEnterHandler, IPointerExitHa
             if (moveCoroutine != null)
             {
                 StopCoroutine(moveCoroutine);
+                PlaySound();
             }
 
             moveCoroutine = StartCoroutine(MoveCards(originalPartyPos.x, originalIDPos.x));
@@ -78,5 +81,10 @@ public class OpenIDFolder : MonoBehaviour , IPointerEnterHandler, IPointerExitHa
 
         partyCard.anchoredPosition = new Vector2(targetPartyX, startPartyPos.y);
         idCard.anchoredPosition = new Vector2(targetIDX, startIDPos.y);
+    }
+
+    public void PlaySound()
+    {
+        AudioSource.PlayClipAtPoint(paperRustle, transform.position);
     }
 }
