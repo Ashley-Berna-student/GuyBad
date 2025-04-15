@@ -1,11 +1,15 @@
 using UnityEngine;
 using Unity.Netcode;
+using System.Threading.Tasks;
 
 namespace GuyBad
 {
     public class GuyBadManager : MonoBehaviour
     {
         private NetworkManager m_NetworkManager;
+        public RelayConnector relayConnector;
+
+        private string joinCodeInput = "";
 
         void Awake()
         {
@@ -31,9 +35,39 @@ namespace GuyBad
 
         void StartButtons()
         {
-            if (GUILayout.Button("Host")) m_NetworkManager.StartHost();
-            if (GUILayout.Button("Client")) m_NetworkManager.StartClient();
-            if (GUILayout.Button("Server")) m_NetworkManager.StartServer();
+            if (GUILayout.Button("Host (Relay)")) _ = StartHostWithRelay();
+            joinCodeInput = GUILayout.TextField(joinCodeInput, GUILayout.Width(200));
+            if (GUILayout.Button("Client (Relay)")) _ = StartClientWithRelay(joinCodeInput);
+            if (GUILayout.Button("Server (No Relay)")) m_NetworkManager.StartServer();
+        }
+
+        async Task StartHostWithRelay()
+        {
+            if (relayConnector != null)
+            {
+                string joinCode = await relayConnector.SetupRelayHost(3);
+                Debug.Log("Relay Join Code: " + joinCode);
+                m_NetworkManager.StartHost();
+            }
+
+            else
+            {
+                Debug.LogWarning("RelayConnector is not assigned!");
+            }
+        }
+
+        async Task StartClientWithRelay(string joinCode)
+        {
+            if (relayConnector != null && !string.IsNullOrEmpty(joinCode))
+            {
+                await relayConnector.SetupRelayClient(joinCode);
+                m_NetworkManager.StartClient();
+            }
+
+            else
+            {
+                Debug.LogWarning("RelayConnector is not assigned or join code is empty!");
+            }
         }
 
         void StatusLabels()
