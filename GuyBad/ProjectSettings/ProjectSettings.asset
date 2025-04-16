@@ -762,7 +762,7 @@ PlayerSettings:
   m_RenderingPath: 1
   m_MobileRenderingPath: 1
   metroPackageName: GuyBad
-  metroPackageVersion: 1.0.0.0
+  metroPackageVersion: 
   metroCertificatePath: 
   metroCertificatePassword: 
   metroCertificateSubject: 
@@ -770,7 +770,7 @@ PlayerSettings:
   metroCertificateNotAfter: 0000000000000000
   metroApplicationDescription: GuyBad
   wsaImages: {}
-  metroTileShortName: GuyBad
+  metroTileShortName: 
   metroTileShowName: 0
   metroMediumTileShowName: 0
   metroLargeTileShowName: 0
@@ -837,11 +837,11 @@ PlayerSettings:
   apiCompatibilityLevel: 6
   activeInputHandler: 0
   windowsGamepadBackendHint: 0
-  cloudProjectId: 92816879-fe78-4105-8f12-004baed58da8
+  cloudProjectId: 82e9f3ed-e69f-4259-b11f-14c6ffd44c8d
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: Guy Bad
-  organizationId: keoh8ae
+  projectName: GuyBad 2025-03-19_12-03-12
+  organizationId: asbe1eb
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   hmiLoadingImage: {fileID: 0}
