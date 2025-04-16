@@ -4,23 +4,6 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes:
-  - enabled: 1
-<<<<<<< HEAD
-    path: Assets/Scenes/MainMenu.unity
-    guid: 325dcba69aa05ac46a5f73437c326755
-  - enabled: 1
-    path: Assets/Scenes/Lobby.unity
-    guid: 3ca9809672e9d284ba59aee910f664d7
-  - enabled: 1
-    path: Assets/Scenes/GameScene.unity
-    guid: 156f7ea5cd34b364aa4f4f9d0059ab0a
-  - enabled: 1
-    path: Assets/Scenes/EndCredits.unity
-    guid: 80e0c443a01a5c64b8fc970eff6b8ded
-=======
-    path: Assets/Scenes/Network Manager testing.unity
-    guid: a9d84cb4e5bb18846bcd32f03829388c
->>>>>>> Keegan
+  m_Scenes: []
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0
