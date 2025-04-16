@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 6689b74ed815d3642bbb065bf30412e4
+timeCreated: 1519384073
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 112263
+  packageName: Croissants Pack
+  packageVersion: 1.0
+  assetPath: Assets/Croissants_Pack/Materials/croissant_02_L0.mat
+  uploadId: 284520
