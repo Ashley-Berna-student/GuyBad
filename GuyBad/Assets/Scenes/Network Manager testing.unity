@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028331, g: 0.2257133, b: 0.3069217, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -120,7 +120,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+<<<<<<< HEAD
 --- !u!1 &1113759833
+=======
+--- !u!1 &90937339
+>>>>>>> Keegan
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -128,22 +132,36 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
+<<<<<<< HEAD
   - component: {fileID: 1113759836}
   - component: {fileID: 1113759835}
   - component: {fileID: 1113759834}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
+=======
+  - component: {fileID: 90937342}
+  - component: {fileID: 90937341}
+  m_Layer: 0
+  m_Name: Relay Manager
+  m_TagString: Untagged
+>>>>>>> Keegan
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+<<<<<<< HEAD
 --- !u!81 &1113759834
 AudioListener:
+=======
+--- !u!114 &90937341
+MonoBehaviour:
+>>>>>>> Keegan
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< HEAD
   m_GameObject: {fileID: 1113759833}
   m_Enabled: 1
 --- !u!20 &1113759835
@@ -198,15 +216,31 @@ Camera:
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
 --- !u!4 &1113759836
+=======
+  m_GameObject: {fileID: 90937339}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c961ba0d82b837a46aa295d9454692e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &90937342
+>>>>>>> Keegan
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< HEAD
   m_GameObject: {fileID: 1113759833}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1, z: -10}
+=======
+  m_GameObject: {fileID: 90937339}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+>>>>>>> Keegan
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -223,6 +257,10 @@ GameObject:
   - component: {fileID: 1221684477}
   - component: {fileID: 1221684476}
   - component: {fileID: 1221684478}
+<<<<<<< HEAD
+=======
+  - component: {fileID: 1221684479}
+>>>>>>> Keegan
   m_Layer: 0
   m_Name: NetworkManager
   m_TagString: Untagged
@@ -245,7 +283,11 @@ MonoBehaviour:
   NetworkConfig:
     ProtocolVersion: 0
     NetworkTransport: {fileID: 1221684478}
+<<<<<<< HEAD
     PlayerPrefab: {fileID: 608133448455247879, guid: b3c0a64f492113c4aa2808e3816fce32, type: 3}
+=======
+    PlayerPrefab: {fileID: 4169960234815280759, guid: b230464e37dacd346acc2d4ac000409b, type: 3}
+>>>>>>> Keegan
     Prefabs:
       NetworkPrefabsLists: []
     TickRate: 30
@@ -261,7 +303,7 @@ MonoBehaviour:
     NetworkIdRecycleDelay: 120
     RpcHashSize: 0
     LoadSceneTimeOut: 120
-    SpawnTimeout: 1
+    SpawnTimeout: 10
     EnableNetworkLogs: 1
     OldPrefabList: []
   RunInBackground: 1
@@ -308,6 +350,22 @@ MonoBehaviour:
     PacketDelayMS: 0
     PacketJitterMS: 0
     PacketDropRate: 0
+<<<<<<< HEAD
+=======
+--- !u!114 &1221684479
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1221684475}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7f2a2f44bda80346bfece20bd029de8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  relayConnector: {fileID: 90937341}
+>>>>>>> Keegan
 --- !u!1 &1910866748
 GameObject:
   m_ObjectHideFlags: 0
@@ -406,6 +464,12 @@ Transform:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+<<<<<<< HEAD
   - {fileID: 1113759836}
   - {fileID: 1910866750}
   - {fileID: 1221684477}
+=======
+  - {fileID: 90937342}
+  - {fileID: 1221684477}
+  - {fileID: 1910866750}
+>>>>>>> Keegan
