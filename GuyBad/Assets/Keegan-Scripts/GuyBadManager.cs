@@ -45,7 +45,7 @@ namespace GuyBad
         {
             if (relayConnector != null)
             {
-                string joinCode = await relayConnector.SetupRelayHost(3);
+                string joinCode = await relayConnector.SetupRelayHost(9);
                 Debug.Log("Relay Join Code: " + joinCode);
                 m_NetworkManager.StartHost();
             }
