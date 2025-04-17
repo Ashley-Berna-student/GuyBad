@@ -20,13 +20,14 @@ public class ChatManager : NetworkBehaviour
 
     void SendMessageToServer(string message)
     {
-        SendChatMessageServerRpc(message, OwnerClientId);
+        SendChatMessageServerRpc(message);
     }
 
     [ServerRpc(RequireOwnership = false)]
-    void SendChatMessageServerRpc(string message, ulong senderClientId)
+    void SendChatMessageServerRpc(string message, ServerRpcParams rpcParams = default)
     {
-        string fullMessage = $"Player {senderClientId}: {message}";
+        ulong senderId = rpcParams.Receive.SenderClientId;
+        string fullMessage = $"Player {senderId}: {message}";
         BroadcastMessageClientRpc(fullMessage);
     }
 

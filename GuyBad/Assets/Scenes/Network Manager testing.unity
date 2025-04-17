@@ -498,8 +498,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 947343216}
-  - component: {fileID: 947343215}
   - component: {fileID: 947343214}
+  - component: {fileID: 947343215}
   m_Layer: 0
   m_Name: Chat Manager
   m_TagString: Untagged
@@ -540,8 +540,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 141788b3a260f3340bbdbeb78f97e63b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chatInputField: {fileID: 0}
-  chatDisplay: {fileID: 0}
+  chatInputField: {fileID: 599737547}
+  chatDisplay: {fileID: 1547678949}
 --- !u!4 &947343216
 Transform:
   m_ObjectHideFlags: 0
