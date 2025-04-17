@@ -26,6 +26,8 @@ public class LobbyUIHandler : MonoBehaviour
 
     void Update()
     {
+        print("lobbyUIHandler update is running");
+
         if (playerCamera == null)
         {
             print("no camera assigned");
