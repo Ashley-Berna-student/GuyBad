@@ -27,7 +27,13 @@ public class ChatManager : NetworkBehaviour
     void SendChatMessageServerRpc(string message, ServerRpcParams rpcParams = default)
     {
         ulong senderId = rpcParams.Receive.SenderClientId;
-        string fullMessage = $"Player {senderId}: {message}";
+
+        var playerObject = NetworkManager.Singleton.ConnectedClients[senderId].PlayerObject;
+        var playerInfo = playerObject.GetComponent<PlayerInfo>();
+
+        string playerName = playerInfo.playerName.Value.ToString();
+        string fullMessage = $"{playerName}: {message}";
+
         BroadcastMessageClientRpc(fullMessage);
     }
 
