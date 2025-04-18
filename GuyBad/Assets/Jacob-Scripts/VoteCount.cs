@@ -10,42 +10,44 @@ public class VoteCount : NetworkBehaviour
 {
     private NetworkVariable<int> voteint = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
     private NetworkVariable<int> voteNein = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
-    private NetworkVariable<bool> isStarted = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
+    private  NetworkVariable<bool> isStarted = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
     [SerializeField] public float time = 5f;
+    [SerializeField] private Text txt;
     // Start is called before the first frame update
     // Update is called once per frame
     public override void OnNetworkSpawn()
     {
-        
+        voteint.OnValueChanged += (int previousValue, int newValue) =>
+        {
+            Debug.Log(OwnerClientId + ";  randomNumber: " + voteint.Value);
+        };
+        isStarted.OnValueChanged += (bool previousval, bool newVal) => {
+            Debug.Log(OwnerClientId + ";  isStarted: " + isStarted.Value.ToString());
+        };
     }
-    [Rpc(SendTo.ClientsAndHost)]
+    /*[Rpc(SendTo.ClientsAndHost)]
     public void TestRpc()
     { 
         Debug.Log(voteint.Value);
-    }
+    }*/
     void Update()
     {
-        if (time == 5f)
-        {
-            Debug.Log(OwnerClientId + " " + isStarted.Value);
-        }
+        //if(!IsOwner) { return; }
         if (isStarted.Value)
         {
-            TestRpc();
-
-            time -= Time.deltaTime;
-            if(time >= 0)
+            float countdown = time -= Time.deltaTime;
+            txt.text = countdown.ToString();
+            if(countdown >= 0)
             { 
-                if(time % 2 == 0)
-                {
-                    TestRpc();
-                }
+
             }
             else
             {
                 Debug.Log("60 Seconds is Over");
-                Debug.Log(voteint);
+                Debug.Log(voteint.Value);
+                Debug.Log(time);
                 isStarted.Value = false;
+                time = 10f;
             }
         }
     }
@@ -62,18 +64,18 @@ public class VoteCount : NetworkBehaviour
             isStarted.Value = false;
         }
     }
-    
     public void GetVote(bool vote)
     {
-        if (!IsOwner) return;
+        if (!IsOwner) { return; }
         if (vote)
         {
-            voteint.Value++;
+            voteint.Value += 1;
         }
         else
         {
-            voteNein.Value++;
+            voteNein.Value -= 1;
         }
+        
     }
     [Rpc(SendTo.Server)]
     public void PingRpc(int pingCount)
