@@ -32,7 +32,7 @@ public class ChatManager : NetworkBehaviour
         var playerInfo = playerObject.GetComponent<PlayerInfo>();
 
         string playerName = playerInfo.playerName.Value.ToString();
-        string fullMessage = $"{playerName}: {message}";
+        string fullMessage = $"<color=#000000>{playerName}: {message}</color>";
 
         BroadcastMessageClientRpc(fullMessage);
     }
