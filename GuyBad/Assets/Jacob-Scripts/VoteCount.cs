@@ -37,19 +37,25 @@ public class VoteCount : NetworkBehaviour
         {
             float countdown = time -= Time.deltaTime;
             txt.text = countdown.ToString();
-            if(countdown >= 0)
-            { 
-
-            }
-            else
+            if(countdown <= 0)
             {
-                Debug.Log("60 Seconds is Over");
-                Debug.Log(voteint.Value);
-                Debug.Log(time);
-                isStarted.Value = false;
+                TimerRpc();
                 time = 10f;
             }
         }
+        else
+        {
+            time = 10f;
+        }
+    }
+
+    [Rpc(SendTo.ClientsAndHost)]
+    private void TimerRpc()
+    {
+        Debug.Log("60 Seconds is Over");
+        Debug.Log(voteint.Value);
+        Debug.Log(time);
+        isStarted.Value = false;
     }
 
     public void GetStart(bool start)
