@@ -26,8 +26,6 @@ public class LobbyUIHandler : MonoBehaviour
 
     void Update()
     {
-        print("lobbyUIHandler update is running");
-
         if (playerCamera == null)
         {
             print("no camera assigned");
@@ -116,15 +114,5 @@ public class LobbyUIHandler : MonoBehaviour
         {
             SceneManager.LoadScene(sceneID);
         }
-    }
-
-    //testing stuff
-    void OnDisable()
-    {
-        print("handler script disabled");
-    }
-    void OnEnable()
-    {
-        print("handler script enabled");
     }
 }
