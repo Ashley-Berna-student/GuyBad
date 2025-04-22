@@ -1,51 +1,60 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class KillAnimations : MonoBehaviour
 {
     private Animator animator;
-    public GameObject bowlingBall;
+    private bool inLobby = false;
 
     // Start is called before the first frame update
     void Start()
     {
         animator = GetComponent<Animator>();
+        Scene currentScene = SceneManager.GetActiveScene();
+        string sceneName = currentScene.name;
+
+        if (sceneName == "Lobby")
+        {
+            inLobby = true;
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.Y))
+        if (!inLobby)
         {
             animator.SetBool("IsInGame", true);
-            print("bool is true");
-        }
-
-/*        if (gameObject.collidesWith("BowlingBall"))
-        {
-            animator.SetBool("BowlingBall", true);
-            print("bowling ball is true");
-        }
-        else
-        {
-            animator.SetBool("BowlingBall", false);
-        }*/
-
-        if (Input.GetKey(KeyCode.R))
-        {
-            animator.SetBool("RayGun", true);
-            print("ray gun is true");
-        }
-        else
-        {
-            animator.SetBool("RayGun", false);
+            print("inLobby is true");
         }
     }
 
-    void OnCollisionEnter(Collision collision)
+    public void HandleCollision(Collision collision)
     {
-        bowlingBall = collision.gameObject;
-        print($"collision with: {collision.gameObject.name}");
+        if (collision.gameObject.CompareTag("BowlingBall"))
+        {
+            animator.SetBool("BowlingBall", true);
+            print("bowlingball is true");
+        }
+        if (collision.gameObject.CompareTag("RayGun"))
+        {
+            animator.SetBool("RayGun", true);
+            print("raygun is true");
+        }
+    }
+    public void HandleCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("BowlingBall"))
+        {
+            animator.SetBool("BowlingBall", false);
+            print("bowlingBAll is false");
+        }
+        if (collision.gameObject.CompareTag("RayGun"))
+        {
+            animator.SetBool("RayGun", false);
+            print("ray gun is false");
+        }
     }
 }

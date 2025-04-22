@@ -8,6 +8,7 @@ TagManager:
   - Host
   - card
   - BowlingBall
+  - RayGun
   layers:
   - Default
   - TransparentFX
