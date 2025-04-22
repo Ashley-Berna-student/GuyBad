@@ -7,6 +7,7 @@ using Unity.Collections;
 public class PlayerInfo : NetworkBehaviour
 {
     public NetworkVariable<FixedString64Bytes> playerName = new NetworkVariable<FixedString64Bytes>(writePerm: NetworkVariableWritePermission.Server);
+    public GameObject playerUIPrefab;
 
     public override void OnNetworkSpawn()
     {
@@ -14,6 +15,8 @@ public class PlayerInfo : NetworkBehaviour
         {
             string chosenName = PlayerName.player_name;
             SetPlayerNameServerRpc(chosenName);
+
+            GameObject ui = Instantiate(playerUIPrefab);
         }
     }
 

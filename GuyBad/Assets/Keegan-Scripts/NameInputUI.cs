@@ -7,11 +7,20 @@ public class NameInputUI : MonoBehaviour
 {
     public TMP_InputField nameInput;
 
-    public void OnNameChanged()
+    public void SaveName()
     {
-        if (!string.IsNullOrWhiteSpace(nameInput.text))
+        string enteredName = nameInput.text;
+
+        if (!string.IsNullOrWhiteSpace(enteredName))
         {
-            PlayerName.player_name = nameInput.text;
+            PlayerName.player_name = enteredName;
+            Debug.Log("Player Name set to: " + enteredName);
+        }
+
+        else
+        {
+            PlayerName.player_name = "Unnamed";
+            Debug.LogWarning("Name was blank. Defaulting to 'Unnnamed'");
         }
     }
 }
