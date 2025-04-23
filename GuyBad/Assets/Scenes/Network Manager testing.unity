@@ -931,6 +931,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   relayConnector: {fileID: 90937341}
+  soundManagerPrefab: {fileID: 3873342971700528704, guid: b4a70d9b0c06b684b817513a85e6235f, type: 3}
 --- !u!1 &1235803330
 GameObject:
   m_ObjectHideFlags: 0

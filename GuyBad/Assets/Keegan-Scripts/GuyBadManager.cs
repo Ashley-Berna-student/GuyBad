@@ -8,12 +8,19 @@ namespace GuyBad
     {
         private NetworkManager m_NetworkManager;
         public RelayConnector relayConnector;
+        public GameObject soundManagerPrefab;
 
         private string joinCodeInput = "";
 
         void Awake()
         {
             m_NetworkManager = GetComponent<NetworkManager>();
+
+            if (GameObject.FindObjectOfType<SoundManagerController>() == null && soundManagerPrefab != null )
+            {
+                GameObject sm = Instantiate(soundManagerPrefab);
+                DontDestroyOnLoad(sm);
+            }
         }
 
         void OnGUI()

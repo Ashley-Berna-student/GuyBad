@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7178668957305523732}
   - component: {fileID: 6665969807454426473}
   - component: {fileID: 5027587115547022362}
+  - component: {fileID: 1187109834688674133}
   m_Layer: 0
   m_Name: Emoji Sound Manager
   m_TagString: Untagged
@@ -46,7 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 979304507
+  GlobalObjectIdHash: 833233050
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -168,3 +169,23 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1187109834688674133
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3873342971700528704}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 973386fee22ecba4fbed4ffcd4db0ae0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioSource: {fileID: 5027587115547022362}
+  sounds:
+  - emojiName: 
+    clip: {fileID: 0}
+  - emojiName: 
+    clip: {fileID: 0}
+  - emojiName: 
+    clip: {fileID: 0}
