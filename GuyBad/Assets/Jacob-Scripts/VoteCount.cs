@@ -36,7 +36,7 @@ public class VoteCount : NetworkBehaviour
         if (isStarted.Value)
         {
             float countdown = time -= Time.deltaTime;
-            txt.text = countdown.ToString();
+            txt.text = countdown.ToString("F1");
             if(countdown <= 0)
             {
                 TimerRpc();
@@ -46,6 +46,8 @@ public class VoteCount : NetworkBehaviour
         else
         {
             time = 10f;
+            voteint.Value = 0;
+            voteNein.Value = 0;
         }
     }
 
@@ -55,33 +57,30 @@ public class VoteCount : NetworkBehaviour
         Debug.Log("60 Seconds is Over");
         Debug.Log(voteint.Value);
         Debug.Log(time);
+
         isStarted.Value = false;
     }
 
-    public void GetStart(bool start)
-    {
-        if (start)
-        {
-           isStarted.Value = true;
-
-        }
-        else
-        {
-            isStarted.Value = false;
-        }
-    }
-    public void GetVote(bool vote)
+    [Rpc(SendTo.ClientsAndHost)]
+    public void GetStartRpc(bool start)
     {
         if (!IsOwner) { return; }
+        isStarted.Value = start;
+    }
+    //[Rpc(SendTo.Server)]
+    public void GetVoteRpc(bool vote)
+    {
+        if (!IsOwner) return;
+
         if (vote)
         {
             voteint.Value += 1;
         }
         else
         {
-            voteNein.Value -= 1;
+            voteNein.Value += 1; // changed from -=
         }
-        
+
     }
     [Rpc(SendTo.Server)]
     public void PingRpc(int pingCount)
