@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.Netcode;
 
-public class SoundManagerController : MonoBehaviour
+public class SoundManagerController : NetworkBehaviour
 {
     public static SoundManagerController instance;
     public AudioSource audioSource;
@@ -40,19 +41,6 @@ public class SoundManagerController : MonoBehaviour
         }
     }
 
-    public void PlayEmojiSound(string emojiName)
-    {
-        if (soundDict.TryGetValue(emojiName, out AudioClip clip))
-        {
-            audioSource.PlayOneShot(clip);
-        }
-
-        else
-        {
-            Debug.LogWarning($"Sound for emoji '{emojiName}' not found!");
-        }
-    }
-
     public void PlayEmojiSoundByIndex(int index)
     {
         if (index >= 0 && index < sounds.Count)
@@ -64,5 +52,17 @@ public class SoundManagerController : MonoBehaviour
         {
             Debug.LogWarning($"Invalid emoji sound index {index}");
         }
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    public void RequestPlayEmojiSoundServerRpc(int index)
+    {
+        PlayEmojiSoundClientRpc(index);
+    }
+
+    [ClientRpc]
+    void PlayEmojiSoundClientRpc(int index)
+    {
+        PlayEmojiSoundByIndex(index);
     }
 }

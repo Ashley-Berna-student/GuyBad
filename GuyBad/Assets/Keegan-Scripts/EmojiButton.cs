@@ -19,7 +19,7 @@ public class EmojiButton : MonoBehaviour
     {
         if (soundManager != null)
         {
-            soundManager.PlayEmojiSoundByIndex(emojiSoundIndex);
+            soundManager.RequestPlayEmojiSoundServerRpc(emojiSoundIndex);
         }
 
         else
