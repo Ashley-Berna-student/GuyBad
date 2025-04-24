@@ -2,21 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Unity.Netcode;
+using System.Linq;
+using Unity.Services.Authentication;
+using UnityEngine.UI;
 
 public class Player : NetworkBehaviour
 {
     [SerializeField] public GameObject playerCapsule;
     public Color playerColor;
-    public NetworkVariable<int> role = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+    [SerializeField] public NetworkVariable<string> role = new NetworkVariable<string>(null, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
     public string playerName;
+    [SerializeField] private Text roleText;
     private MeshRenderer ma = new MeshRenderer();
     private List<MeshRenderer> renderers = new List<MeshRenderer>();
-    private GameObject[] players;
 
     private void Start()
     {
         Initialize();
+        //roleText.text = role.Value;
     }
+
 
     private void Initialize()
     {
@@ -31,7 +36,6 @@ public class Player : NetworkBehaviour
         if (IsOwner)
         {
             Initialize();
-            role.Value = Random.Range(0, 3);
             playerColor = Random.ColorHSV();
             ma.material.SetColor("_Color", playerColor);
             //players = GameObject.FindGameObjectsWithTag("Player");

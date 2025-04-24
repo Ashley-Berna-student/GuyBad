@@ -12,10 +12,10 @@ public class Roles : NetworkBehaviour
 
     }
     public void RoleCall()
-    {
+    {/*
         if (newPlayer[0].GetComponent<Player>().role.Value == 1)
         {
 
-        }
+        }*/
     }
 }
