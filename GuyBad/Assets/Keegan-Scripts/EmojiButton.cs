@@ -5,10 +5,26 @@ using UnityEngine;
 public class EmojiButton : MonoBehaviour
 {
     public int emojiSoundIndex;
-    public EmojiSoundManager soundManager;
+    public SoundManagerController soundManager;
+
+    private void Start()
+    {
+        if (soundManager == null)
+        {
+            soundManager = SoundManagerController.instance;
+        }
+    }
 
     public void OnEmojiClicked()
     {
-        soundManager.PlayEmojiSound(emojiSoundIndex);
+        if (soundManager != null)
+        {
+            soundManager.PlayEmojiSoundByIndex(emojiSoundIndex);
+        }
+
+        else
+        {
+            Debug.LogWarning("Sound Manager is not assigned on EmojiButton.");
+        }
     }
 }

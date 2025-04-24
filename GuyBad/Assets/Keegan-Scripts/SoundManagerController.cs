@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SoundManagerController : MonoBehaviour
 {
-    private static SoundManagerController instance;
+    public static SoundManagerController instance;
     public AudioSource audioSource;
 
     [System.Serializable]
@@ -50,6 +50,19 @@ public class SoundManagerController : MonoBehaviour
         else
         {
             Debug.LogWarning($"Sound for emoji '{emojiName}' not found!");
+        }
+    }
+
+    public void PlayEmojiSoundByIndex(int index)
+    {
+        if (index >= 0 && index < sounds.Count)
+        {
+            audioSource.PlayOneShot(sounds[index].clip);
+        }
+
+        else
+        {
+            Debug.LogWarning($"Invalid emoji sound index {index}");
         }
     }
 }
