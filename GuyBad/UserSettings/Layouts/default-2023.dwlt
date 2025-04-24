@@ -416,9 +416,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 807b0000
+      m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: e869ffff526affff8284ffff98a4fffff6a4ffff8cb9ffffeaf2ffffaaf4ffffb87c0000f2af0000
+      m_ExpandedIDs: a611ffff225fffffa279ffff70c1ffffc6d9ffffcad9ffff90e1ffff14f3ffffaaf4fffff6a7000066a80000e0af00005cb0000044b10000deb10000088702001a870200
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -931,9 +931,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -60.55317, y: 9.371967, z: 11.00085}
+    m_Target: {x: -21.19421, y: -12.821564, z: 164.11583}
     speed: 2
-    m_Value: {x: -60.55317, y: 9.371967, z: 11.00085}
+    m_Value: {x: -21.19421, y: -12.821564, z: 164.11583}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -979,20 +979,20 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: -0.07866452, y: 0.062490128, z: -0.004933482, w: -0.9949723}
+    m_Target: {x: -0.023392346, y: 0.017163895, z: -0.0004919836, w: -0.99966866}
     speed: 2
-    m_Value: {x: -0.07866839, y: 0.06099494, z: -0.0048152697, w: -0.9950215}
+    m_Value: {x: -0.023390247, y: 0.017162355, z: -0.0004919394, w: -0.99957895}
   m_Size:
-    m_Target: 9.129469
+    m_Target: 317.58896
     speed: 2
-    m_Value: 9.129469
+    m_Value: 303.91287
   m_Ortho:
     m_Target: 0
     speed: 2
     m_Value: 0
   m_CameraSettings:
-    m_Speed: 1
-    m_SpeedNormalized: 0.5
+    m_Speed: 1.4802599
+    m_SpeedNormalized: 0.73999995
     m_SpeedMin: 0.001
     m_SpeedMax: 2
     m_EasingEnabled: 1
@@ -1057,7 +1057,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scenes
+    - Assets/Sprites
     m_Globs: []
     m_ProductIds: 
     m_AnyWithAssetOrigin: 0
@@ -1067,16 +1067,16 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Scenes
+  - Assets/Sprites
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\asbe1eb\Desktop\MyGuyBAd\GuyBad\GuyBad
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 147}
-    m_SelectedIDs: f07a0000
-    m_LastClickedID: 31472
-    m_ExpandedIDs: 00000000787a00007a7a00007c7a00007e7a0000807a0000827a0000847a0000867a0000
+    scrollPos: {x: 0, y: 0}
+    m_SelectedIDs: f27a0000
+    m_LastClickedID: 31474
+    m_ExpandedIDs: 00000000787a00007a7a00007c7a00007e7a0000807a0000827a0000847a0000867a0000ee7a0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1218,9 +1218,9 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 0
-    y: 561
-    width: 1465
-    height: 430
+    y: 650
+    width: 1464
+    height: 341
   m_SerializedDataModeController:
     m_DataMode: 0
     m_PreferredDataMode: 0
@@ -1234,7 +1234,7 @@ MonoBehaviour:
     m_OverlaysVisible: 1
   m_LockTracker:
     m_IsLocked: 0
-  m_LastSelectedObjectID: -39980
+  m_LastSelectedObjectID: -34486
 --- !u!114 &18
 MonoBehaviour:
   m_ObjectHideFlags: 52

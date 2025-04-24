@@ -10,6 +10,11 @@ public class Shooting : MonoBehaviour
 
     public float force;
     public bool shootPlayer = false;
+
+    public Transform location1;
+    public Transform location2;
+    private float rotationSpeed = 5000f;
+    private Transform currentTarget;
     
     void Update()
     {
@@ -17,6 +22,18 @@ public class Shooting : MonoBehaviour
         {
             shootPlayer = true;
             GetRandomObject();
+        }
+        if(Input.GetKeyDown(KeyCode.I))
+        {
+            currentTarget = location1;
+            print("location = 1");
+            TurnShooter();
+        }
+        if(Input.GetKeyDown(KeyCode.Y))
+        {
+            currentTarget = location2;
+            print("location = 2");
+            TurnShooter();
         }
         if (shootPlayer)
         {
@@ -30,5 +47,20 @@ public class Shooting : MonoBehaviour
     {
         int randomIndex = UnityEngine.Random.Range(0, perjectiles.Length);
         randomObject = perjectiles[randomIndex];
+    }
+
+    public void TurnShooter()
+    {
+        if (currentTarget != null)
+        {
+            Vector3 direction = currentTarget.position - transform.position;
+            direction.y = 0;
+
+            if (direction != Vector3.zero)
+            {
+                Quaternion targetRotation = Quaternion.LookRotation(direction);
+                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+            }
+        }
     }
 }
