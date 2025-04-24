@@ -24,7 +24,7 @@ public class KillAnimations : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (inLobby)
+        if (!inLobby)
         {
             animator.SetBool("IsInGame", true);
             print("inLobby is true");

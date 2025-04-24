@@ -20,5 +20,7 @@ public class KillPlayer : MonoBehaviour
         yield return new WaitForSeconds(timeBeforeExploding);
         target.SetActive(false);
         particles.SetActive(true);
+        yield return new WaitForSeconds(timeBeforeExploding);
+        gameObject.SetActive(false);
     }
 }
