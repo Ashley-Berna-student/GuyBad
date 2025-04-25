@@ -7,39 +7,98 @@ public class Shooting : MonoBehaviour
     public GameObject[] perjectiles;
     public Transform shooter;
     private GameObject randomObject;
+    public GameObject rayGun;
 
     public float force;
     public bool shootPlayer = false;
 
     public Transform location1;
     public Transform location2;
+    public Transform location3;
+    public Transform location4;
+    public Transform location5;
+    public Transform location6;
+    public Transform location7;
+    public Transform location8;
+    public Transform location9;
+    public Transform location10;
     private float rotationSpeed = 5000f;
     private Transform currentTarget;
     
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.J))
+        if(Input.GetKeyDown(KeyCode.P))
         {
             shootPlayer = true;
             GetRandomObject();
         }
-        if(Input.GetKeyDown(KeyCode.I))
+        if(Input.GetKeyDown(KeyCode.A))
         {
             currentTarget = location1;
             print("location = 1");
             TurnShooter();
         }
-        if(Input.GetKeyDown(KeyCode.Y))
+        if(Input.GetKeyDown(KeyCode.B))
         {
             currentTarget = location2;
             print("location = 2");
             TurnShooter();
         }
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            currentTarget = location3;
+            print("location = 3");
+            TurnShooter();
+        }
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            currentTarget = location4;
+            print("location = 4");
+            TurnShooter();
+        }
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            currentTarget = location5;
+            print("location = 5");
+            TurnShooter();
+        }
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            currentTarget = location6;
+            print("location = 6");
+            TurnShooter();
+        }
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            currentTarget = location7;
+            print("location = 7");
+            TurnShooter();
+        }
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            currentTarget = location8;
+            print("location = 8");
+            TurnShooter();
+        }
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            currentTarget = location9;
+            print("location = 9");
+            TurnShooter();
+        }
+        if (Input.GetKeyDown(KeyCode.J))
+        {
+            currentTarget = location10;
+            print("location = 10");
+            TurnShooter();
+        }
         if (shootPlayer)
         {
+            rayGun.SetActive(true);
             GameObject bullet = Instantiate(randomObject, shooter.position, shooter.rotation);
             bullet.GetComponent<Rigidbody>().velocity = shooter.forward * force * Time.deltaTime;
             shootPlayer = false;
+            StartCoroutine(DeactivateRayGun());
         }
     }
 
@@ -62,5 +121,11 @@ public class Shooting : MonoBehaviour
                 transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
             }
         }
+    }
+
+    IEnumerator DeactivateRayGun()
+    {
+        yield return new WaitForSeconds(1f);
+        rayGun.SetActive(false);
     }
 }

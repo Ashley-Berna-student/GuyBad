@@ -27,7 +27,26 @@ public class KillAnimations : MonoBehaviour
         if (!inLobby)
         {
             animator.SetBool("IsInGame", true);
-            print("inLobby is true");
+        }
+
+        //reactions stuff for testing purposes
+        if (Input.GetKeyDown(KeyCode.Z))
+        {
+            animator.SetBool("IsEvilLaughing", true);
+            print("evil laughter");
+            StartCoroutine(ResetBool("IsEvilLaughing", 1f));
+        }
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+            animator.SetBool("IsClapping", true);
+            print("clapping");
+            StartCoroutine(ResetBool("IsClapping", 1f));
+        }
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            animator.SetBool("IsGasping", true);
+            print("gasping");
+            StartCoroutine(ResetBool("IsGasping", 1f));
         }
     }
 
@@ -36,12 +55,10 @@ public class KillAnimations : MonoBehaviour
         if (collision.gameObject.CompareTag("BowlingBall"))
         {
             animator.SetBool("BowlingBall", true);
-            print("bowlingball is true");
         }
         if (collision.gameObject.CompareTag("RayGun"))
         {
             animator.SetBool("RayGun", true);
-            print("raygun is true");
         }
     }
     public void HandleCollisionExit(Collision collision)
@@ -49,12 +66,16 @@ public class KillAnimations : MonoBehaviour
         if (collision.gameObject.CompareTag("BowlingBall"))
         {
             animator.SetBool("BowlingBall", false);
-            print("bowlingBAll is false");
         }
         if (collision.gameObject.CompareTag("RayGun"))
         {
             animator.SetBool("RayGun", false);
-            print("ray gun is false");
         }
+    }
+
+    IEnumerator ResetBool(string paramname, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        animator.SetBool(paramname, false);
     }
 }
