@@ -8,12 +8,19 @@ using UnityEngine.UI;
 
 public class Player : NetworkBehaviour
 {
+    public enum roles
+    {
+        None, 
+        Liberal, 
+        BadGuy,
+        GuyBad
+    }
     [SerializeField] public GameObject playerCapsule;
-    public Color playerColor;
-    [SerializeField] public NetworkVariable<string> role = new NetworkVariable<string>(null, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+    public Color playerColor = default;
+    [SerializeField] public NetworkVariable<roles> role = new NetworkVariable<roles>(roles.None, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
     public string playerName;
     [SerializeField] private Text roleText;
-    private MeshRenderer ma = new MeshRenderer();
+    private NetworkVariable<MeshRenderer> ma = new NetworkVariable<MeshRenderer>();
     private List<MeshRenderer> renderers = new List<MeshRenderer>();
 
     private void Start()
@@ -27,7 +34,7 @@ public class Player : NetworkBehaviour
     {
         if (ma == null)
         {
-            ma = playerCapsule.GetComponent<MeshRenderer>();
+            ma.Value = playerCapsule.GetComponent<MeshRenderer>();
         }
     }
     // Start is called before the first frame update
@@ -35,10 +42,7 @@ public class Player : NetworkBehaviour
     {
         if (IsOwner)
         {
-            Initialize();
-            playerColor = Random.ColorHSV();
-            ma.material.SetColor("_Color", playerColor);
-            //players = GameObject.FindGameObjectsWithTag("Player");
+            SetColorRpc();
         }
         else
         {
@@ -46,4 +50,13 @@ public class Player : NetworkBehaviour
         }
         
     }
+    [Rpc(SendTo.ClientsAndHost)]
+    public void SetColorRpc()
+    {
+        Initialize();
+        playerColor = Random.ColorHSV();
+        ma.Value.material.SetColor("_Color", playerColor);
+        //players = GameObject.FindGameObjectsWithTag("Player");
+    }
+
 } 

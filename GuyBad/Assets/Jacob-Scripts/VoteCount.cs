@@ -21,6 +21,10 @@ public class VoteCount : NetworkBehaviour
         {
             Debug.Log(OwnerClientId + ";  randomNumber: " + voteint.Value);
         };
+        voteNein.OnValueChanged += (int previousValue, int newValue) =>
+        {
+            Debug.Log(OwnerClientId + ";  randomNumber: " + voteNein.Value);
+        };
         isStarted.OnValueChanged += (bool previousval, bool newVal) => {
             Debug.Log(OwnerClientId + ";  isStarted: " + isStarted.Value.ToString());
         };
@@ -32,7 +36,6 @@ public class VoteCount : NetworkBehaviour
     }*/
     void Update()
     {
-        //if(!IsOwner) { return; }
         if (isStarted.Value)
         {
             float countdown = time -= Time.deltaTime;
@@ -54,11 +57,14 @@ public class VoteCount : NetworkBehaviour
     [Rpc(SendTo.ClientsAndHost)]
     private void TimerRpc()
     {
+
         Debug.Log("60 Seconds is Over");
-        Debug.Log(voteint.Value);
+        Debug.Log("Yes: " + voteint.Value);
+        Debug.Log("No: " + voteNein.Value);
         Debug.Log(time);
 
-        isStarted.Value = false;
+            isStarted.Value = false;
+        
     }
 
     [Rpc(SendTo.ClientsAndHost)]
@@ -67,11 +73,10 @@ public class VoteCount : NetworkBehaviour
         if (!IsOwner) { return; }
         isStarted.Value = start;
     }
-    //[Rpc(SendTo.Server)]
+    [Rpc(SendTo.Server)]
     public void GetVoteRpc(bool vote)
     {
-        if (!IsOwner) return;
-
+        if (!IsOwner) { return;}
         if (vote)
         {
             voteint.Value += 1;
