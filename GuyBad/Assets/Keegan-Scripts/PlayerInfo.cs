@@ -17,7 +17,18 @@ public class PlayerInfo : NetworkBehaviour
             SetPlayerNameServerRpc(chosenName);
 
             GameObject ui = Instantiate(playerUIPrefab);
+
+            var playerUI = ui.GetComponent<PlayerUI>();
+            if (playerUI != null && PlayerListManager.Instance != null)
+            {
+                PlayerListManager.Instance.SetListContainer(playerUI.listContainer);
+            }
         }
+
+        playerName.OnValueChanged += (oldValue, newValue) =>
+        {
+            Debug.Log($"[client] PLayer name updated: {newValue}");
+        };
     }
 
     [ServerRpc]
