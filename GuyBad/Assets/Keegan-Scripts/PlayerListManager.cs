@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Unity.Netcode;
 using TMPro;
+using UnityEngine.UI;
 
 public class PlayerListManager : MonoBehaviour
 {
@@ -19,19 +20,6 @@ public class PlayerListManager : MonoBehaviour
         else Destroy(gameObject);
     }
 
-    public void SetListContainer(Transform container)
-    {
-        listContainer = container;
-
-        foreach (var client in NetworkManager.Singleton.ConnectedClientsList)
-        {
-            if (!playerListItems.ContainsKey(client.ClientId))
-            {
-                AddPlayerToList(client.ClientId);
-            }
-        }
-    }
-
     private void Start()
     {
         NetworkManager.Singleton.OnClientConnectedCallback += OnClientConnected;
@@ -43,11 +31,39 @@ public class PlayerListManager : MonoBehaviour
             {
                 AddPlayerToList(client.ClientId);
             }
-        }  
+        }
+    }
+
+    private void InitializeListContainer()
+    {
+        GameObject canvas = GameObject.Find("Testing canvas(Clone)");
+        if (canvas != null)
+        {
+            listContainer = canvas.transform.Find("ListOfPlayers (1)/Scroll View/Viewport/Name Content");
+            if (listContainer == null)
+            {
+                Debug.LogError("List container not found!");
+            }
+
+            else
+            {
+                Debug.Log("Successfully found List container: " + listContainer.name);
+            }
+        }
+
+        else
+        {
+            Debug.LogError("Canvas not Found!");
+        }
     }
 
     void OnClientConnected(ulong clientId)
     {
+        if (listContainer == null)
+        {
+            InitializeListContainer();
+        }
+
         AddPlayerToList(clientId);
     }
 
@@ -67,9 +83,40 @@ public class PlayerListManager : MonoBehaviour
             return;
         }
 
+        if (listContainer == null)
+        {
+            Debug.LogError("list container is null. Cannot add player");
+        }
+
         GameObject item = Instantiate(playerListItemPrefab, listContainer);
         var info = item.GetComponent<PlayerListItemUI>();
         info.SetPlayer(clientId);
         playerListItems.Add(clientId, item);
+
+
+        RectTransform rectTransform = listContainer.GetComponent<RectTransform>();
+        if (rectTransform != null)
+        {
+            LayoutRebuilder.ForceRebuildLayoutImmediate(rectTransform);
+        }
+
+        else
+        {
+            Debug.LogError("listContainer doesn't have a RectTransform component");
+        }
+        
+    }
+
+    public void SetListContainer(Transform container)
+    {
+        listContainer = container;
+
+        foreach (var client in NetworkManager.Singleton.ConnectedClientsList)
+        {
+            if (!playerListItems.ContainsKey(client.ClientId))
+            {
+                AddPlayerToList(client.ClientId);
+            }
+        }
     }
 }

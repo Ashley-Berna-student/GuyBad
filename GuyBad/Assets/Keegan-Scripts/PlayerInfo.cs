@@ -15,20 +15,19 @@ public class PlayerInfo : NetworkBehaviour
         {
             string chosenName = PlayerName.player_name;
             SetPlayerNameServerRpc(chosenName);
-
-            GameObject ui = Instantiate(playerUIPrefab);
-
-            var playerUI = ui.GetComponent<PlayerUI>();
-            if (playerUI != null && PlayerListManager.Instance != null)
-            {
-                PlayerListManager.Instance.SetListContainer(playerUI.listContainer);
-            }
         }
+
+        GameObject ui = Instantiate(playerUIPrefab);
 
         playerName.OnValueChanged += (oldValue, newValue) =>
         {
-            Debug.Log($"[client] PLayer name updated: {newValue}");
+            Debug.Log($"[client] Player name updated: {newValue}");
         };
+
+        if (PlayerListManager.Instance != null)
+        {
+            PlayerListManager.Instance.SetListContainer(ui.transform.Find("ListOfPlayers (1)/Scroll View/ Viewport/Name Content"));
+        }
     }
 
     [ServerRpc]
