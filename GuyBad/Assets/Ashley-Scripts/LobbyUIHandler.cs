@@ -5,6 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class LobbyUIHandler : MonoBehaviour
 {
@@ -13,12 +14,15 @@ public class LobbyUIHandler : MonoBehaviour
     public GameObject clapButton;
     public GameObject gaspButton;
     public GameObject laughButton;
+    public GameObject doorButton;
     public AudioClip clapSound;
     public AudioClip gaspSound;
     public AudioClip laughSound;
+    public int sceneID = 1;
     private bool isClapping = false;
     private bool isGasping = false;
     private bool isLaughing = false;
+    private bool leaveLobby = false;
 
     void Update()
     {
@@ -76,6 +80,12 @@ public class LobbyUIHandler : MonoBehaviour
             PlaySound();
             isLaughing = false;
         }
+        if (colorName == doorButton.name && gameObject.CompareTag("Host"))
+        {
+            leaveLobby = true;
+            print("you are now leaving the lobby");
+            LeaveLobby();
+        }
         else
         {
             print("invalid selection");
@@ -95,6 +105,14 @@ public class LobbyUIHandler : MonoBehaviour
         if (isLaughing)
         {
             AudioSource.PlayClipAtPoint(laughSound, transform.position);
+        }
+    }
+
+    public void LeaveLobby()
+    {
+        if (leaveLobby)
+        {
+            SceneManager.LoadScene(sceneID);
         }
     }
 }

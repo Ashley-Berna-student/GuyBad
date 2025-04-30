@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: c156f9e0102719a438d5a8f7be3a732d
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150261
+  packageName: Plants
+  packageVersion: 1.0
+  assetPath: Assets/PlantsPackage/demoScene.unity
+  uploadId: 320782

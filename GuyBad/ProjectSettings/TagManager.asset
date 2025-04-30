@@ -5,6 +5,10 @@ TagManager:
   serializedVersion: 2
   tags:
   - TealPlayer
+  - Host
+  - card
+  - BowlingBall
+  - RayGun
   layers:
   - Default
   - TransparentFX
