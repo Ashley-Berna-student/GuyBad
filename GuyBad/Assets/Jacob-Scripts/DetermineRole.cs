@@ -17,14 +17,6 @@ public class DetermineRole : NetworkBehaviour
     }*/
     public override void OnNetworkSpawn()
     {
-        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
-        foreach(GameObject player in players)
-        {
-            Player p = player.GetComponent<Player>();
-            if(p != null)
-            {
-                
-            }
-        }
+
     }
 }
