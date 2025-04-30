@@ -1,77 +1,91 @@
+using NUnit.Framework.Constraints;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
 using Unity.Networking;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class VoteCount : NetworkBehaviour
 {
     private NetworkVariable<int> voteint = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
     private NetworkVariable<int> voteNein = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
-    private NetworkVariable<bool> isStarted = new NetworkVariable<bool>(false);
+    private  NetworkVariable<bool> isStarted = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
     [SerializeField] public float time = 5f;
+    [SerializeField] private Text txt;
     // Start is called before the first frame update
     // Update is called once per frame
     public override void OnNetworkSpawn()
     {
-        
+        voteint.OnValueChanged += (int previousValue, int newValue) =>
+        {
+            Debug.Log(OwnerClientId + ";  randomNumber: " + voteint.Value);
+        };
+        voteNein.OnValueChanged += (int previousValue, int newValue) =>
+        {
+            Debug.Log(OwnerClientId + ";  randomNumber: " + voteNein.Value);
+        };
+        isStarted.OnValueChanged += (bool previousval, bool newVal) => {
+            Debug.Log(OwnerClientId + ";  isStarted: " + isStarted.Value.ToString());
+        };
     }
+    /*[Rpc(SendTo.ClientsAndHost)]
     public void TestRpc()
     { 
-        Debug.Log(voteint);
-    }
+        Debug.Log(voteint.Value);
+    }*/
     void Update()
     {
-        if (!IsOwner) return;
-        if (time == 5f)
-        {
-            Debug.Log(OwnerClientId + " " + isStarted.Value);
-        }
-        if (!IsOwner) return;
         if (isStarted.Value)
         {
-           
-            time -= Time.deltaTime;
-            if(time >= 0)
-            { 
-                if(time % 2 == 0)
-                {
-                    TestRpc();
-                }
-            }
-            else
+            float countdown = time -= Time.deltaTime;
+            txt.text = countdown.ToString("F1");
+            if(countdown <= 0)
             {
-                Debug.Log("60 Seconds is Over");
-                Debug.Log(voteint);
-                isStarted.Value = false;
+                TimerRpc();
+                time = 10f;
             }
+        }
+        else
+        {
+            time = 10f;
+            voteint.Value = 0;
+            voteNein.Value = 0;
         }
     }
 
-    public void GetStart(bool start)
+    [Rpc(SendTo.ClientsAndHost)]
+    private void TimerRpc()
     {
-        if(!IsOwner) return;
-        if (start)
-        {
-            isStarted.Value = true;
-        }
-        else
-        {
+
+        Debug.Log("60 Seconds is Over");
+        Debug.Log("Yes: " + voteint.Value);
+        Debug.Log("No: " + voteNein.Value);
+        Debug.Log(time);
+
             isStarted.Value = false;
-        }
+        
     }
-    
-    public void GetVote(bool vote)
+
+    [Rpc(SendTo.ClientsAndHost)]
+    public void GetStartRpc(bool start)
     {
-        if(!IsOwner)  return; 
+        if (!IsOwner) { return; }
+        isStarted.Value = start;
+    }
+    [Rpc(SendTo.Server)]
+    public void GetVoteRpc(bool vote)
+    {
+        if (!IsOwner) { return;}
         if (vote)
         {
-            voteint.Value++;
+            voteint.Value += 1;
         }
         else
         {
-            voteNein.Value++;
+            voteNein.Value += 1; // changed from -=
         }
+
     }
     [Rpc(SendTo.Server)]
     public void PingRpc(int pingCount)
