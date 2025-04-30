@@ -9550,7 +9550,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8370682536557516940, guid: 87112103708f7c642adbeff43edf5936, type: 3}
       propertyPath: sceneID
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8370682536557516940, guid: 87112103708f7c642adbeff43edf5936, type: 3}
       propertyPath: clapSound
