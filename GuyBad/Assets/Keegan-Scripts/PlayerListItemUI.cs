@@ -10,10 +10,30 @@ public class PlayerListItemUI : MonoBehaviour
     
     public void SetPlayer(ulong clientId)
     {
-        var player = NetworkManager.Singleton.ConnectedClients[clientId].PlayerObject;
-        var info = player.GetComponent<PlayerInfo>();
+        StartCoroutine(WaitForPlayerName(clientId));
+    }
+
+    private IEnumerator WaitForPlayerName(ulong clientId)
+    {
+        NetworkObject player = NetworkManager.Singleton.ConnectedClients[clientId].PlayerObject;
+        if (player == null)
+        {
+            Debug.LogError("NoPlayerObject for clientId: " + clientId);
+            yield break;
+        }
+
+        PlayerInfo info = player.GetComponent<PlayerInfo>();
+
+        while (string.IsNullOrEmpty(info.playerName.Value.ToString()))
+        {
+            yield return null;
+        }
 
         nameText.text = info.playerName.Value.ToString();
-        info.playerName.OnValueChanged += (oldName, newName) => nameText.text = newName.ToString();
+
+        info.playerName.OnValueChanged += (oldVal, newVal) =>
+        {
+            nameText.text = newVal.ToString();
+        };
     }
 }

@@ -19,15 +19,16 @@ public class PlayerInfo : NetworkBehaviour
 
         GameObject ui = Instantiate(playerUIPrefab);
 
+        var listManager = ui.GetComponentInChildren<PlayerListManager>();
+        if (listManager != null)
+        {
+            listManager.StartCoroutine(listManager.WaitForCanvasAndAssignContainer());
+        }
+
         playerName.OnValueChanged += (oldValue, newValue) =>
         {
             Debug.Log($"[client] Player name updated: {newValue}");
         };
-
-        if (PlayerListManager.Instance != null)
-        {
-            PlayerListManager.Instance.SetListContainer(ui.transform.Find("ListOfPlayers (1)/Scroll View/ Viewport/Name Content"));
-        }
     }
 
     [ServerRpc]

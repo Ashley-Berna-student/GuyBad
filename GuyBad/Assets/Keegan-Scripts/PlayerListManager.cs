@@ -14,6 +14,9 @@ public class PlayerListManager : MonoBehaviour
 
     private Dictionary<ulong, GameObject> playerListItems = new();
 
+    private bool isListReady = false;
+    private Queue<ulong> queuedClients = new();
+
     void Awake()
     {
         if (Instance == null) Instance = this;
@@ -22,49 +25,33 @@ public class PlayerListManager : MonoBehaviour
 
     private void Start()
     {
+        StartCoroutine(WaitForCanvasAndAssignContainer());
+
         NetworkManager.Singleton.OnClientConnectedCallback += OnClientConnected;
         NetworkManager.Singleton.OnClientDisconnectCallback += OnClientDisconnected;
-
-        if (NetworkManager.Singleton.IsServer)
-        {
-            foreach (var client in NetworkManager.Singleton.ConnectedClientsList)
-            {
-                AddPlayerToList(client.ClientId);
-            }
-        }
     }
 
     private void InitializeListContainer()
     {
-        GameObject canvas = GameObject.Find("Testing canvas(Clone)");
-        if (canvas != null)
+        StartCoroutine(WaitForCanvasAndAssignContainer());
+    }
+
+    void OnClientConnected(ulong clientId)
+    {
+        if (!isListReady)
         {
-            listContainer = canvas.transform.Find("ListOfPlayers (1)/Scroll View/Viewport/Name Content");
+            queuedClients.Enqueue(clientId);
+
             if (listContainer == null)
             {
-                Debug.LogError("List container not found!");
-            }
-
-            else
-            {
-                Debug.Log("Successfully found List container: " + listContainer.name);
+                StartCoroutine(WaitForCanvasAndAssignContainer());
             }
         }
 
         else
         {
-            Debug.LogError("Canvas not Found!");
+            AddPlayerToList(clientId);
         }
-    }
-
-    void OnClientConnected(ulong clientId)
-    {
-        if (listContainer == null)
-        {
-            InitializeListContainer();
-        }
-
-        AddPlayerToList(clientId);
     }
 
     void OnClientDisconnected(ulong clientId)
@@ -86,6 +73,7 @@ public class PlayerListManager : MonoBehaviour
         if (listContainer == null)
         {
             Debug.LogError("list container is null. Cannot add player");
+            return;
         }
 
         GameObject item = Instantiate(playerListItemPrefab, listContainer);
@@ -117,6 +105,35 @@ public class PlayerListManager : MonoBehaviour
             {
                 AddPlayerToList(client.ClientId);
             }
+        }
+    }
+
+    public IEnumerator WaitForCanvasAndAssignContainer()
+    {
+
+
+        GameObject canvas = null;
+
+        while (canvas == null)
+        {
+            canvas = GameObject.Find("Testing canvas(Clone)");
+            yield return null;
+        }
+
+        listContainer = canvas.transform.Find("ListOfPlayers (1)/Scroll View/Viewport/Name Content");
+
+        if (listContainer == null)
+        {
+            Debug.LogError("List container not found");
+            yield break;
+        }
+
+        Debug.Log("Canvas and list container found!");
+        isListReady = true;
+
+        while (queuedClients.Count > 0)
+        {
+            AddPlayerToList(queuedClients.Dequeue());
         }
     }
 }
