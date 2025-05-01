@@ -9,7 +9,6 @@ namespace GuyBad
         private NetworkManager m_NetworkManager;
         public RelayConnector relayConnector;
         public GameObject soundManagerPrefab;
-        public GameObject playerUIPrefab;
 
         private string joinCodeInput = "";
 
@@ -56,12 +55,6 @@ namespace GuyBad
                 string joinCode = await relayConnector.SetupRelayHost(9);
                 Debug.Log("Relay Join Code: " + joinCode);
                 m_NetworkManager.StartHost();
-
-                if (playerUIPrefab != null && GameObject.FindObjectOfType<PlayerListManager>() == null)
-                {
-                    GameObject ui = Instantiate(playerUIPrefab);
-                    DontDestroyOnLoad(ui);
-                }
             }
 
             else

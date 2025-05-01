@@ -4,10 +4,11 @@ using UnityEngine;
 using Unity.Netcode;
 using TMPro;
 using UnityEngine.UI;
+using Unity.VisualScripting;
 
 public class PlayerListManager : MonoBehaviour
 {
-    public static PlayerListManager Instance { get; private set; }
+    public static PlayerListManager Instance;
 
     public Transform listContainer;
     public GameObject playerListItemPrefab;
@@ -19,8 +20,16 @@ public class PlayerListManager : MonoBehaviour
 
     void Awake()
     {
-        if (Instance == null) Instance = this;
-        else Destroy(gameObject);
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void Start()
@@ -98,14 +107,6 @@ public class PlayerListManager : MonoBehaviour
     public void SetListContainer(Transform container)
     {
         listContainer = container;
-
-        foreach (var client in NetworkManager.Singleton.ConnectedClientsList)
-        {
-            if (!playerListItems.ContainsKey(client.ClientId))
-            {
-                AddPlayerToList(client.ClientId);
-            }
-        }
     }
 
     public IEnumerator WaitForCanvasAndAssignContainer()
@@ -134,6 +135,53 @@ public class PlayerListManager : MonoBehaviour
         while (queuedClients.Count > 0)
         {
             AddPlayerToList(queuedClients.Dequeue());
+        }
+
+        yield return new WaitForSeconds(0.25f);
+        RebuildPlayerList();
+    }
+
+    public void RebuildPlayerList()
+    {
+        ClearList();
+
+        if (!NetworkManager.Singleton.IsServer)
+        {
+            foreach (var info in FindObjectsOfType<PlayerInfo>())
+            {
+                if (!string.IsNullOrEmpty(info.playerName.Value.ToString()))
+                {
+                    AddPlayerToList(info.OwnerClientId);
+                }
+            }
+        }
+
+        else
+        {
+            foreach (var obj in GameObject.FindObjectsOfType<PlayerInfo>())
+            {
+                if (!string.IsNullOrEmpty(obj.playerName.Value.ToString()))
+                {
+                    AddPlayerToList(obj.OwnerClientId);
+                }
+            }
+        }
+    }
+
+    public static void UpdateAllPlayerLists()
+    {
+        if (Instance != null)
+        {
+            Instance.RebuildPlayerList();
+        }
+    }
+
+    public void ClearList()
+    {
+        foreach (Transform child in listContainer)
+        {
+            //Debug.Log($"Destroying UI item: {child.name}");
+            //Destroy(child.gameObject);
         }
     }
 }

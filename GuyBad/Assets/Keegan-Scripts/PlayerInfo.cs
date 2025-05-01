@@ -15,25 +15,47 @@ public class PlayerInfo : NetworkBehaviour
         {
             string chosenName = PlayerName.player_name;
             SetPlayerNameServerRpc(chosenName);
+
+            if (PlayerListManager.Instance != null)
+            {
+                GameObject ui = Instantiate(playerUIPrefab);
+
+                var listManager = ui.GetComponentInChildren<PlayerListManager>();
+                if (listManager != null && PlayerListManager.Instance == null)
+                {
+                    listManager.StartCoroutine(listManager.WaitForCanvasAndAssignContainer());
+                }
+
+                else
+                {
+                    Debug.LogError("PlayerListManager not found in instantiated UI prefab.");
+                }
+            }
         }
 
-        GameObject ui = Instantiate(playerUIPrefab);
-
-        var listManager = ui.GetComponentInChildren<PlayerListManager>();
-        if (listManager != null)
+        if (IsServer)
         {
-            listManager.StartCoroutine(listManager.WaitForCanvasAndAssignContainer());
+            StartCoroutine(RebuildListAfterDelay());
         }
 
-        playerName.OnValueChanged += (oldValue, newValue) =>
+        /*playerName.OnValueChanged += (oldValue, newValue) =>
         {
-            Debug.Log($"[client] Player name updated: {newValue}");
-        };
+            if (PlayerListManager.Instance != null)
+            {
+                PlayerListManager.Instance.RebuildPlayerList();
+            }
+        };*/
     }
 
     [ServerRpc]
     void SetPlayerNameServerRpc(string name)
     {
         playerName.Value = name;
+    }
+
+    IEnumerator RebuildListAfterDelay()
+    {
+        yield return new WaitForSeconds(0.5f);
+        PlayerListManager.Instance?.RebuildPlayerList();
     }
 }

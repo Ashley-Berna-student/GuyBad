@@ -15,15 +15,37 @@ public class PlayerListItemUI : MonoBehaviour
 
     private IEnumerator WaitForPlayerName(ulong clientId)
     {
-        NetworkObject player = NetworkManager.Singleton.ConnectedClients[clientId].PlayerObject;
-        if (player == null)
+        PlayerInfo info = null;
+        float timeout = 2f;
+        float elapsed = 0f;
+
+        // Try to find the PlayerInfo belonging to this clientId
+        while (info == null && elapsed < timeout)
         {
-            Debug.LogError("NoPlayerObject for clientId: " + clientId);
+            foreach (var player in FindObjectsOfType<PlayerInfo>())
+            {
+                if (player.OwnerClientId == clientId)
+                {
+                    info = player;
+                    break;
+                }
+            }
+
+            if (info == null)
+            {
+                elapsed += 0.1f;
+                yield return new WaitForSeconds(0.1f);
+            }
+        }
+
+        if (info == null)
+        {
+            Debug.LogWarning("Could not find PlayerInfo for clientId: " + clientId);
+            nameText.text = "Unknown";
             yield break;
         }
 
-        PlayerInfo info = player.GetComponent<PlayerInfo>();
-
+        // Wait until the name is set
         while (string.IsNullOrEmpty(info.playerName.Value.ToString()))
         {
             yield return null;
