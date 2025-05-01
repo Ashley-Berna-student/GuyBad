@@ -101,7 +101,7 @@ public class PlayerListManager : MonoBehaviour
         {
             Debug.LogError("listContainer doesn't have a RectTransform component");
         }
-        
+
     }
 
     public void SetListContainer(Transform container)

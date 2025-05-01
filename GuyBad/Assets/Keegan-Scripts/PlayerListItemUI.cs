@@ -3,14 +3,30 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using Unity.Netcode;
+using UnityEngine.UI;
 
 public class PlayerListItemUI : MonoBehaviour
 {
     public TextMeshProUGUI nameText;
+    public Button selectButton;
+
+    private ulong clientId;
     
     public void SetPlayer(ulong clientId)
     {
+        this.clientId = clientId;
+
+        if (selectButton != null)
+        {
+            selectButton.onClick.AddListener(OnSelected);
+        }
+
         StartCoroutine(WaitForPlayerName(clientId));
+    }
+
+    private void OnSelected()
+    {
+        Debug.Log($"Player with clientId {clientId} selected");
     }
 
     private IEnumerator WaitForPlayerName(ulong clientId)
