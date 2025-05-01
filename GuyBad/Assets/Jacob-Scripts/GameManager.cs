@@ -8,7 +8,7 @@ using static Player;
 
 public class GameManager : NetworkBehaviour
 {
-    
+
     // Start is called before the first frame update
     public override void OnNetworkSpawn()
     {
