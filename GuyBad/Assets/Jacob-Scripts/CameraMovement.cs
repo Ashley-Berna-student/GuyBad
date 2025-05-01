@@ -23,11 +23,15 @@ public class CameraMovement : NetworkBehaviour
     void Update()
     {
         if (!IsOwner) return;
-
-            float mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * sensX;
+        Vector3 fwd = transform.TransformDirection(Vector3.forward);
+        float mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * sensX;
             float mouseY = Input.GetAxisRaw("Mouse Y") * Time.deltaTime * sensY;
             if (canRotate)
             {
+            if(Physics.Raycast(transform.position, fwd, 10))
+            {
+                print("Object in front of player.");
+            }
                 rotatey += mouseX;
 
             rotatex += mouseY;

@@ -186,8 +186,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerCapsule: {fileID: 4484218246185340313}
-  playerColor: {r: 0.05660379, g: 0.05660379, b: 0.05660379, a: 0}
+  playerColor: {r: 1, g: 0.10849059, b: 0.10849059, a: 1}
+  role:
+    m_InternalValue: 0
   playerName: 
+  president: 0
+  chancellor: 0
+  roleText: {fileID: 0}
 --- !u!114 &8851022452260414796
 MonoBehaviour:
   m_ObjectHideFlags: 0
