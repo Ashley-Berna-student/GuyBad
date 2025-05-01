@@ -552,7 +552,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Ya
+  m_Text: Start Timer
 --- !u!222 &1622877634
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -899,8 +899,8 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1976305238}
   - {fileID: 2109475811}
+  - {fileID: 1976305238}
   - {fileID: 1816761294}
   - {fileID: 1649449874}
   - {fileID: 716424651}
@@ -945,7 +945,7 @@ GameObject:
   - component: {fileID: 1816761296}
   - component: {fileID: 1816761295}
   m_Layer: 5
-  m_Name: Button (Legacy) (1)
+  m_Name: VoteNeinButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1181,7 +1181,7 @@ GameObject:
   - component: {fileID: 1976305240}
   - component: {fileID: 1976305239}
   m_Layer: 5
-  m_Name: Button (Legacy)
+  m_Name: VoteYesButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1435,7 +1435,7 @@ GameObject:
   - component: {fileID: 2109475813}
   - component: {fileID: 2109475812}
   m_Layer: 5
-  m_Name: Button (Legacy) (2)
+  m_Name: StartTimerButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
