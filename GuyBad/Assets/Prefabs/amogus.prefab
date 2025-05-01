@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4903581308921882483}
   - component: {fileID: 4013232850439560113}
   - component: {fileID: 5229585161244646972}
+  - component: {fileID: 3225428721035866119}
   m_Layer: 0
   m_Name: Camera
   m_TagString: MainCamera
@@ -97,6 +98,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameraHolder: {fileID: 5058247444986544510}
+--- !u!114 &3225428721035866119
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 818566481089775122}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3fd58c95598fc734abed2f696b49894a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4169960234815280759
 GameObject:
   m_ObjectHideFlags: 0
@@ -192,7 +205,6 @@ MonoBehaviour:
   playerName: 
   president: 0
   chancellor: 0
-  roleText: {fileID: 0}
 --- !u!114 &8851022452260414796
 MonoBehaviour:
   m_ObjectHideFlags: 0
