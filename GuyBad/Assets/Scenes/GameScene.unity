@@ -1914,12 +1914,12 @@ MonoBehaviour:
   good3: {fileID: 789251041}
   good4: {fileID: 1542026241}
   good5: {fileID: 882877096}
-  bad1: {fileID: 460113449}
-  bad2: {fileID: 1577407095}
-  bad3: {fileID: 1570132467}
-  bad4: {fileID: 533070679}
-  bad5: {fileID: 1811274541}
-  bad6: {fileID: 215087166}
+  bad1: {fileID: 215087166}
+  bad2: {fileID: 1811274541}
+  bad3: {fileID: 533070679}
+  bad4: {fileID: 1570132467}
+  bad5: {fileID: 1577407095}
+  bad6: {fileID: 460113449}
   testingChosenCard: {fileID: 459847592}
   amountOfGoodCards: 0
   amountOfBadCards: 0
