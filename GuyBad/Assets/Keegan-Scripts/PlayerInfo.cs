@@ -15,6 +15,7 @@ public class PlayerInfo : NetworkBehaviour
         {
             string chosenName = PlayerName.player_name;
             SetPlayerNameServerRpc(chosenName);
+           
 
             if (PlayerListManager.Instance != null)
             {
@@ -25,26 +26,15 @@ public class PlayerInfo : NetworkBehaviour
                 {
                     listManager.StartCoroutine(listManager.WaitForCanvasAndAssignContainer());
                 }
-
-                else
-                {
-                    Debug.LogError("PlayerListManager not found in instantiated UI prefab.");
-                }
             }
         }
 
-        if (IsServer)
+        /*if (IsServer)
         {
-            StartCoroutine(RebuildListAfterDelay());
-        }
+            StartCoroutine(NotifyClientsDelayed());
+        }*/
 
-        /*playerName.OnValueChanged += (oldValue, newValue) =>
-        {
-            if (PlayerListManager.Instance != null)
-            {
-                PlayerListManager.Instance.RebuildPlayerList();
-            }
-        };*/
+        StartCoroutine(NotifyClientsDelayed());
     }
 
     [ServerRpc]
@@ -53,9 +43,14 @@ public class PlayerInfo : NetworkBehaviour
         playerName.Value = name;
     }
 
-    IEnumerator RebuildListAfterDelay()
+    IEnumerator NotifyClientsDelayed()
     {
+        // Slight delay to ensure playerName is set before UI rebuild
         yield return new WaitForSeconds(0.5f);
-        PlayerListManager.Instance?.RebuildPlayerList();
+
+        if (PlayerListManager.Instance != null)
+        {
+            PlayerListManager.Instance.RebuildListClientRpc();
+        }
     }
 }

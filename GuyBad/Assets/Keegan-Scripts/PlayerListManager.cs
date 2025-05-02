@@ -12,7 +12,6 @@ public class PlayerListManager : MonoBehaviour
 
     public Transform listContainer;
     public GameObject playerListItemPrefab;
-
     private Dictionary<ulong, GameObject> playerListItems = new();
 
     private bool isListReady = false;
@@ -35,7 +34,6 @@ public class PlayerListManager : MonoBehaviour
     private void Start()
     {
         StartCoroutine(WaitForCanvasAndAssignContainer());
-
         NetworkManager.Singleton.OnClientConnectedCallback += OnClientConnected;
         NetworkManager.Singleton.OnClientDisconnectCallback += OnClientDisconnected;
     }
@@ -50,11 +48,6 @@ public class PlayerListManager : MonoBehaviour
         if (!isListReady)
         {
             queuedClients.Enqueue(clientId);
-
-            if (listContainer == null)
-            {
-                StartCoroutine(WaitForCanvasAndAssignContainer());
-            }
         }
 
         else
@@ -70,6 +63,11 @@ public class PlayerListManager : MonoBehaviour
             Destroy(item);
             playerListItems.Remove(clientId);
         }
+    }
+
+    private void PlayerListChanged(NetworkListEvent<ulong> changeEvent)
+    {
+        RebuildPlayerList();
     }
 
     void AddPlayerToList(ulong clientId)
@@ -91,7 +89,7 @@ public class PlayerListManager : MonoBehaviour
         playerListItems.Add(clientId, item);
 
 
-        RectTransform rectTransform = listContainer.GetComponent<RectTransform>();
+        /*RectTransform rectTransform = listContainer.GetComponent<RectTransform>();
         if (rectTransform != null)
         {
             LayoutRebuilder.ForceRebuildLayoutImmediate(rectTransform);
@@ -100,7 +98,7 @@ public class PlayerListManager : MonoBehaviour
         else
         {
             Debug.LogError("listContainer doesn't have a RectTransform component");
-        }
+        }*/
 
     }
 
@@ -145,7 +143,16 @@ public class PlayerListManager : MonoBehaviour
     {
         ClearList();
 
-        if (!NetworkManager.Singleton.IsServer)
+        PlayerInfo[] allPlayers = FindObjectsOfType<PlayerInfo>();
+        foreach (var player in allPlayers)
+        {
+            if (!string.IsNullOrEmpty(player.playerName.Value.ToString()))
+            {
+                AddPlayerToList(player.OwnerClientId);
+            }
+        }
+
+        /*if (!NetworkManager.Singleton.IsServer)
         {
             foreach (var info in FindObjectsOfType<PlayerInfo>())
             {
@@ -165,7 +172,7 @@ public class PlayerListManager : MonoBehaviour
                     AddPlayerToList(obj.OwnerClientId);
                 }
             }
-        }
+        }*/
     }
 
     public static void UpdateAllPlayerLists()
@@ -178,10 +185,17 @@ public class PlayerListManager : MonoBehaviour
 
     public void ClearList()
     {
-        foreach (Transform child in listContainer)
+        foreach (var item in playerListItems.Values)
         {
-            //Debug.Log($"Destroying UI item: {child.name}");
-            //Destroy(child.gameObject);
+            Destroy(item);
         }
+        playerListItems.Clear();
+    }
+
+
+    [ClientRpc]
+    public void RebuildListClientRpc()
+    {
+        RebuildPlayerList();
     }
 }

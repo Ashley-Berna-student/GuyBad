@@ -15,12 +15,6 @@ public class PlayerListItemUI : MonoBehaviour
     public void SetPlayer(ulong clientId)
     {
         this.clientId = clientId;
-
-        if (selectButton != null)
-        {
-            selectButton.onClick.AddListener(OnSelected);
-        }
-
         StartCoroutine(WaitForPlayerName(clientId));
     }
 
