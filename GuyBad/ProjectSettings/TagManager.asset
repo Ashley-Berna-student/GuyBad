@@ -10,6 +10,8 @@ TagManager:
   - BowlingBall
   - RayGun
   - President
+  - BadCard
+  - GoodCard
   layers:
   - Default
   - TransparentFX
