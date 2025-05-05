@@ -8,6 +8,7 @@ public class PlayerInfo : NetworkBehaviour
 {
     public NetworkVariable<FixedString64Bytes> playerName = new NetworkVariable<FixedString64Bytes>(writePerm: NetworkVariableWritePermission.Server);
     public GameObject playerUIPrefab;
+    public TextMesh nameLabel;
 
     public override void OnNetworkSpawn()
     {
@@ -29,10 +30,8 @@ public class PlayerInfo : NetworkBehaviour
             }
         }
 
-        /*if (IsServer)
-        {
-            StartCoroutine(NotifyClientsDelayed());
-        }*/
+        UpdateFloatingName(playerName.Value.ToString());
+        playerName.OnValueChanged += OnPlayerNameChanged;
 
         StartCoroutine(NotifyClientsDelayed());
     }
@@ -52,5 +51,23 @@ public class PlayerInfo : NetworkBehaviour
         {
             PlayerListManager.Instance.RebuildListClientRpc();
         }
+    }
+
+    private void OnPlayerNameChanged(FixedString64Bytes oldVal, FixedString64Bytes newVal)
+    {
+        UpdateFloatingName(newVal.ToString());
+    }
+
+    private void UpdateFloatingName(string name)
+    {
+        if (nameLabel != null)
+        {
+            nameLabel.text = name;
+        }
+    }
+
+    private void OnDestroy()
+    {
+        playerName.OnValueChanged -= OnPlayerNameChanged;
     }
 }

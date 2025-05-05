@@ -198,4 +198,22 @@ public class PlayerListManager : MonoBehaviour
     {
         RebuildPlayerList();
     }
+
+    private void OnEnable()
+    {
+        PlayerListItemUI.OnPlayerSelected += HandlePlayerSelected;
+    }
+
+    private void OnDisable()
+    {
+        PlayerListItemUI.OnPlayerSelected -= HandlePlayerSelected;
+    }
+
+    private void HandlePlayerSelected(ulong clientId)
+    {
+        Debug.Log($"Client {clientId} selected from UI");
+
+        //Add logic for what happens here
+
+    }
 }

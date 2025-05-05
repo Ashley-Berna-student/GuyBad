@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using Unity.Netcode;
 using UnityEngine.UI;
+using System;
 
 public class PlayerListItemUI : MonoBehaviour
 {
@@ -11,11 +12,18 @@ public class PlayerListItemUI : MonoBehaviour
     public Button selectButton;
 
     private ulong clientId;
+
+    public static event Action<ulong> OnPlayerSelected;
     
     public void SetPlayer(ulong clientId)
     {
         this.clientId = clientId;
         StartCoroutine(WaitForPlayerName(clientId));
+
+        if (selectButton != null)
+        {
+            selectButton.onClick.AddListener(OnSelected);
+        }
     }
 
     private void OnSelected()

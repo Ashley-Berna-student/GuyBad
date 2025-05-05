@@ -236,6 +236,7 @@ MonoBehaviour:
         byte0060: 0
         byte0061: 0
   playerUIPrefab: {fileID: 8786785015106256865, guid: aa458ed09e3055f4fa21265612999216, type: 3}
+  nameLabel: {fileID: 6575829843315808557}
 --- !u!1 &5752639749213134736
 GameObject:
   m_ObjectHideFlags: 0
