@@ -115,7 +115,7 @@ public class PlayerListManager : MonoBehaviour
 
         while (canvas == null)
         {
-            canvas = GameObject.Find("Testing canvas(Clone)");
+            canvas = GameObject.FindGameObjectWithTag("PlayerUI");
             yield return null;
         }
 
