@@ -12,6 +12,7 @@ TagManager:
   - President
   - BadCard
   - GoodCard
+  - Chancellor
   layers:
   - Default
   - TransparentFX

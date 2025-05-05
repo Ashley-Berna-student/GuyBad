@@ -39,6 +39,7 @@ public class KeepTrackOfPresident : MonoBehaviour
     {
         GameObject[] playersWithPlayerTag = GameObject.FindGameObjectsWithTag("Player");
         GameObject[] playersWithHostTag = GameObject.FindGameObjectsWithTag("Host");
+        GameObject currentChancellor = GameObject.FindGameObjectWithTag("Chancellor");
 
         List<GameObject> allPlayers = new List<GameObject>();
         allPlayers.AddRange(playersWithPlayerTag);
@@ -46,7 +47,10 @@ public class KeepTrackOfPresident : MonoBehaviour
 
         Vector3 targetPosition = Vector3.zero;
 
-        if (IsAt(transform.position, sign1.position)) targetPosition = president1.position;
+        if (IsAt(transform.position, sign1.position))
+        {
+            targetPosition = president1.position;
+        }
         else if (IsAt(transform.position, sign2.position)) targetPosition = president2.position;
         else if (IsAt(transform.position, sign3.position)) targetPosition = president3.position;
         else if (IsAt(transform.position, sign4.position)) targetPosition = president4.position;
@@ -77,6 +81,7 @@ public class KeepTrackOfPresident : MonoBehaviour
             if (lastPresident != null)
             {
                 lastPresident.tag = "Player";
+                currentChancellor.tag = "Player";
                 print($"{lastPresident.name} is no longer the President");
             }
 
