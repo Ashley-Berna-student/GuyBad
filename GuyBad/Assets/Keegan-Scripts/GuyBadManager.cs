@@ -34,7 +34,6 @@ namespace GuyBad
             else
             {
                 StatusLabels();
-                SubmitNewPosition();
             }
 
             GUILayout.EndArea();
@@ -85,26 +84,6 @@ namespace GuyBad
             GUILayout.Label("Transport: " +
                 m_NetworkManager.NetworkConfig.NetworkTransport.GetType().Name);
             GUILayout.Label("Mode: " + mode);
-        }
-
-        void SubmitNewPosition()
-        {
-            if (GUILayout.Button(m_NetworkManager.IsServer ? "Move" : "Request Position Change"))
-            {
-                if (m_NetworkManager.IsServer && !m_NetworkManager.IsClient)
-                {
-                    foreach(ulong uid in m_NetworkManager.ConnectedClientsIds)
-                    {
-                        m_NetworkManager.SpawnManager.GetPlayerNetworkObject(uid).GetComponent<Player>();
-                    }
-                }
-
-                else
-                {
-                    var playerObject = m_NetworkManager.SpawnManager.GetLocalPlayerObject();
-                    var player = playerObject.GetComponent<Player>();
-                }
-            }
         }
     }
 }

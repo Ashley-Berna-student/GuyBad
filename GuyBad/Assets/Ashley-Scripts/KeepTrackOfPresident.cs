@@ -87,6 +87,7 @@ public class KeepTrackOfPresident : MonoBehaviour
 
             newPresident.tag = "President";
             print($"{newPresident.name} is now the President");
+            PlayerListItemUI.ResetChancellorChoice();
             lastPresident = newPresident;
         }
         // If no one is close enough, do not reset the President.
