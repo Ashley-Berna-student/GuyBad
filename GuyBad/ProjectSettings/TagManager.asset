@@ -3,7 +3,16 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - TealPlayer
+  - Host
+  - card
+  - BowlingBall
+  - RayGun
+  - President
+  - BadCard
+  - GoodCard
+  - Chancellor
   layers:
   - Default
   - TransparentFX

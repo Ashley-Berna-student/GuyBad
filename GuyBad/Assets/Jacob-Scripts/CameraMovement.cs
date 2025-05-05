@@ -1,8 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
-public class CameraMovement : MonoBehaviour
+using UnityEngine;
+using Unity.Netcode;
+
+public class CameraMovement : NetworkBehaviour
 {
     public static float rotatex;
     public static float rotatey;
@@ -11,7 +11,6 @@ public class CameraMovement : MonoBehaviour
     [SerializeField] public float sensY;
     [SerializeField] public Transform orientation;
     private bool canRotate = true;
-
     public float rotateSpeed = 1.0f;
     // Start is called before the first frame update
     void Start()
@@ -23,48 +22,36 @@ public class CameraMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        /* rotatex = gameObject.transform.localEulerAngles.x;
-         rotatey = gameObject.transform.localEulerAngles.y;
-         if (Input.GetKey(KeyCode.A))
-         {
-             transform.rotation = Quaternion.Euler(rotatex, rotatey += rotateSpeed * Time.deltaTime, rotatez);
-         }
-         else if (Input.GetKey(KeyCode.S))
-         {
-             transform.rotation = Quaternion.Euler(rotatex += rotateSpeed * Time.deltaTime, rotatey, rotatez);
-         }
-         else if (Input.GetKey(KeyCode.W))
-         {
-             transform.rotation = Quaternion.Euler(rotatex -= rotateSpeed * Time.deltaTime, rotatey, rotatez);
-         }
-         else if (Input.GetKey(KeyCode.D))
-         {
-             transform.rotation = Quaternion.Euler(rotatex, rotatey -= rotateSpeed * Time.deltaTime, rotatez);
-         }*/
-
-            float mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * sensX;
+        if (!IsOwner) return;
+        Vector3 fwd = transform.TransformDirection(Vector3.forward);
+        float mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * sensX;
             float mouseY = Input.GetAxisRaw("Mouse Y") * Time.deltaTime * sensY;
-        if (canRotate)
-        {
-            rotatey += mouseX;
+            if (canRotate)
+            {
+            if(Physics.Raycast(transform.position, fwd, 10))
+            {
+                print("Object in front of player.");
+            }
+                rotatey += mouseX;
 
-            rotatex -= mouseY;
+            rotatex += mouseY;
             rotatex = Mathf.Clamp(rotatex, -90f, 90f);
 
-            transform.rotation = Quaternion.Euler(rotatex, rotatey, 0);
-            orientation.rotation = Quaternion.Euler(0, rotatey, 0);
-        }
-        if (Input.GetKey(KeyCode.LeftAlt))
-        {
-            canRotate = false;
-            Cursor.lockState = CursorLockMode.None; 
-            Cursor.visible = true;
-        }
-        else
-        {
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
-            canRotate = true;
-        }
+                transform.rotation = Quaternion.Euler(rotatex, rotatey, 0);
+                orientation.rotation = Quaternion.Euler(0, rotatey, 0);
+            }
+            if (Input.GetKey(KeyCode.LeftAlt))
+            {
+                canRotate = false;
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+            }
+            else
+            {
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+                canRotate = true;
+            }
+        
     }
 }
