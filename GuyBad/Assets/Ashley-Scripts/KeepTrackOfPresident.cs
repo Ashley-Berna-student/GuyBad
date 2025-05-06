@@ -81,8 +81,17 @@ public class KeepTrackOfPresident : MonoBehaviour
             if (lastPresident != null)
             {
                 lastPresident.tag = "Player";
-                currentChancellor.tag = "Player";
-                print($"{lastPresident.name} is no longer the President");
+
+                // Null check for currentChancellor before modifying it
+                if (currentChancellor != null)
+                {
+                    currentChancellor.tag = "Player";
+                    print($"{lastPresident.name} is no longer the President");
+                }
+                else
+                {
+                    Debug.LogWarning("Current Chancellor is null, cannot reset tag.");
+                }
             }
 
             newPresident.tag = "President";
@@ -90,7 +99,6 @@ public class KeepTrackOfPresident : MonoBehaviour
             PlayerListItemUI.ResetChancellorChoice();
             lastPresident = newPresident;
         }
-        // If no one is close enough, do not reset the President.
     }
 
     GameObject FindClosestPlayer(List<GameObject> players, Vector3 targetPos)

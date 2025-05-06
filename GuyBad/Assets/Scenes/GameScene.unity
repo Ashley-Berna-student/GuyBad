@@ -1839,6 +1839,18 @@ MonoBehaviour:
   pos2: {fileID: 125951324}
   pos3: {fileID: 279340476}
   pos4: {fileID: 116732253}
+  policyCards:
+  - {fileID: 459847592}
+  - {fileID: 1378604455}
+  - {fileID: 789251041}
+  - {fileID: 1542026241}
+  - {fileID: 882877096}
+  - {fileID: 460113449}
+  - {fileID: 1577407095}
+  - {fileID: 1570132467}
+  - {fileID: 533070679}
+  - {fileID: 1811274541}
+  - {fileID: 215087166}
 --- !u!4 &270719645
 Transform:
   m_ObjectHideFlags: 0
@@ -1911,7 +1923,7 @@ MonoBehaviour:
   bad4: {fileID: 1570132467}
   bad5: {fileID: 1577407095}
   bad6: {fileID: 460113449}
-  testingChosenCard: {fileID: 459847592}
+  testingChosenCard: {fileID: 460113449}
   amountOfGoodCards: 0
   amountOfBadCards: 0
 --- !u!114 &270719648
@@ -5797,6 +5809,8 @@ MonoBehaviour:
   location8: {fileID: 1304640005}
   location9: {fileID: 1557885418}
   location10: {fileID: 1561141428}
+  badGuyCard1: {fileID: 1577407095}
+  badGuyCard2: {fileID: 1570132467}
 --- !u!4 &862313267
 Transform:
   m_ObjectHideFlags: 0
