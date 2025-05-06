@@ -1851,6 +1851,7 @@ MonoBehaviour:
   - {fileID: 533070679}
   - {fileID: 1811274541}
   - {fileID: 215087166}
+  chippyFlippedPolicy: 0
 --- !u!4 &270719645
 Transform:
   m_ObjectHideFlags: 0
@@ -1926,6 +1927,7 @@ MonoBehaviour:
   testingChosenCard: {fileID: 460113449}
   amountOfGoodCards: 0
   amountOfBadCards: 0
+  movePresidentScript: {fileID: 270719644}
 --- !u!114 &270719648
 MonoBehaviour:
   m_ObjectHideFlags: 0
