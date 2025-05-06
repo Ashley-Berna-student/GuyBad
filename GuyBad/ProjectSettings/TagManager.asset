@@ -13,6 +13,7 @@ TagManager:
   - BadCard
   - GoodCard
   - Chancellor
+  - PlayerUI
   layers:
   - Default
   - TransparentFX

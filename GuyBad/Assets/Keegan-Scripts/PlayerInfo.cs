@@ -6,6 +6,7 @@ using Unity.Collections;
 
 public class PlayerInfo : NetworkBehaviour
 {
+    public NetworkVariable<bool> isAlive = new NetworkVariable<bool>(true, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
     public NetworkVariable<FixedString64Bytes> playerName = new NetworkVariable<FixedString64Bytes>(writePerm: NetworkVariableWritePermission.Server);
     public GameObject playerUIPrefab;
     public TextMesh nameLabel;
@@ -32,6 +33,8 @@ public class PlayerInfo : NetworkBehaviour
 
         UpdateFloatingName(playerName.Value.ToString());
         playerName.OnValueChanged += OnPlayerNameChanged;
+
+        isAlive.OnValueChanged += OnAliveStateChanged;
 
         StartCoroutine(NotifyClientsDelayed());
     }
@@ -69,5 +72,21 @@ public class PlayerInfo : NetworkBehaviour
     private void OnDestroy()
     {
         playerName.OnValueChanged -= OnPlayerNameChanged;
+    }
+
+    public void killPlayer()
+    {
+        if (IsServer)
+        {
+            isAlive.Value = false;
+        }
+    }
+
+    private void OnAliveStateChanged(bool oldVal, bool newVal)
+    {
+        if (!newVal)
+        {
+            PlayerListManager.Instance?.RemovePlayerFromList(OwnerClientId);
+        }
     }
 }
