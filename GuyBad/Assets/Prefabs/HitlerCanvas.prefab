@@ -1494,6 +1494,7 @@ GameObject:
   - component: {fileID: 52221601578209997}
   - component: {fileID: 7988902223886260320}
   - component: {fileID: 3406878574017770974}
+  - component: {fileID: 2710102811156048345}
   m_Layer: 5
   m_Name: HitlerCanvas
   m_TagString: PlayerUI
@@ -1523,8 +1524,8 @@ RectTransform:
   - {fileID: 2515863833665703417}
   - {fileID: 4369653705780609355}
   - {fileID: 8936402440943249839}
-  - {fileID: 3168142906634722848}
   - {fileID: 1963014498929160277}
+  - {fileID: 3168142906634722848}
   - {fileID: 122111796671510687}
   - {fileID: 8454765715338497827}
   - {fileID: 7317639554563997101}
@@ -1630,6 +1631,40 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   listContainer: {fileID: 5949176816829455981}
+--- !u!114 &2710102811156048345
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1485336306457120815}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6ca638ed79c11b438ed80a9ffc4fa56, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  policyCards:
+  - {fileID: 6926958061216561298}
+  - {fileID: 2162820994557465103}
+  - {fileID: 8612216064150741691}
+  - {fileID: 4276903888966588627}
+  - {fileID: 602056484552526235}
+  - {fileID: 8293472225950275112}
+  - {fileID: 2275661485653061278}
+  - {fileID: 162547871733462158}
+  - {fileID: 1061695622166437885}
+  - {fileID: 4168740412894847833}
+  - {fileID: 1380199369659734315}
+  - {fileID: 8858421003153121677}
+  - {fileID: 949830969189249896}
+  - {fileID: 8193939739474211373}
+  - {fileID: 7963402649285516920}
+  - {fileID: 1491402980784810053}
+  - {fileID: 2479439960954724906}
+  cardSlots:
+  - {fileID: 3902552484520720682}
+  - {fileID: 3984245310315708540}
+  - {fileID: 1778384748256609608}
 --- !u!1 &1491402980784810053
 GameObject:
   m_ObjectHideFlags: 0
