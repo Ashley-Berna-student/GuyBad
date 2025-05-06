@@ -2,37 +2,51 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Unity.Netcode;
+using System.Linq;
+using Unity.Services.Authentication;
+using UnityEngine.UI;
 
 public class Player : NetworkBehaviour
 {
+    public enum roles
+    {
+        None, 
+        Liberal, 
+        BadGuy,
+        GuyBad
+    }
     [SerializeField] public GameObject playerCapsule;
-    public Color playerColor;
+    public Color playerColor = Color.red;
+    [SerializeField] public NetworkVariable<roles> role = new NetworkVariable<roles>(roles.None, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
     public string playerName;
-    private MeshRenderer ma;
-    private bool vote = false;
-    private GameObject[] players;
+    public bool president = false;
+    public bool chancellor = false;
+    //[SerializeField] private Text roleText;
+   // private NetworkVariable<MeshRenderer> ma = new NetworkVariable<MeshRenderer>();
+    //private List<MeshRenderer> renderers = new List<MeshRenderer>();
 
     private void Start()
     {
-        Initialize();
+       // Initialize();
+        //roleText.text = role.Value;
     }
+
 
     private void Initialize()
     {
-        if (ma == null)
+       /* if (ma == null)
         {
-            ma = playerCapsule.GetComponent<MeshRenderer>();
-        }
+            ma.Value = playerCapsule.GetComponent<MeshRenderer>();
+        }*/
     }
     // Start is called before the first frame update
     public override void OnNetworkSpawn()
     {
         if (IsOwner)
         {
-            Initialize();
-            playerColor = Random.ColorHSV();
-            ma.material.SetColor("_Color", playerColor);
-            //players = GameObject.FindGameObjectsWithTag("Player");
+           /* Initialize();
+            ma.Value.material.SetColor("_Color", playerColor);*/
+            //SetColorRpc();
         }
         else
         {
@@ -40,4 +54,13 @@ public class Player : NetworkBehaviour
         }
         
     }
+    //[Rpc(SendTo.ClientsAndHost)]
+   /* public void SetColorRpc()
+    {
+        Initialize();
+        playerColor = Random.ColorHSV();
+        ma.Value.material.SetColor("_Color", playerColor);
+        //players = GameObject.FindGameObjectsWithTag("Player");
+    }*/
+
 } 

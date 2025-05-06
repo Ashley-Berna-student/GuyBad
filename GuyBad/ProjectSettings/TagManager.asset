@@ -5,6 +5,14 @@ TagManager:
   serializedVersion: 2
   tags:
   - TealPlayer
+  - Host
+  - card
+  - BowlingBall
+  - RayGun
+  - President
+  - BadCard
+  - GoodCard
+  - Chancellor
   - PlayerUI
   layers:
   - Default
