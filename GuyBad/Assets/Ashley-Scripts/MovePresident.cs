@@ -20,8 +20,27 @@ public class MovePresident : MonoBehaviour
     private bool voteIsNein = false;
     private int currentTargetIndex = 0;
 
+    public GameObject[] policyCards;
+    private bool[] hasMovedForObject;
+    public bool chippyFlippedPolicy = false;
+
+    void Start()
+    {
+        hasMovedForObject = new bool[policyCards.Length];
+    }
+
     void Update()
     {
+        for (int i = 0; i < policyCards.Length; i++)
+        {
+            if (policyCards[i].activeSelf && !hasMovedForObject[i])
+            {
+                Movement();
+                hasMovedForObject[i] = true;
+                print($"Moved for object {policyCards[i].name}");
+            }
+        }
+
         if (moving && currentTargetIndex < pos.Length)
         {
             Vector3 target = pos[currentTargetIndex].position;
@@ -61,7 +80,8 @@ public class MovePresident : MonoBehaviour
         {
             chippyrb.MovePosition(pos4.position);
             print("flip new policy");
-            StartCoroutine(PauseChippy(2f));//not working
+            chippyFlippedPolicy = true;
+            StartCoroutine(PauseChippy(2f));
         }
     }
 

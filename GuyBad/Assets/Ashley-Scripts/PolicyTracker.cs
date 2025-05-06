@@ -28,6 +28,9 @@ public class PolicyTracker : MonoBehaviour
     public int amountOfGoodCards = 0;
     public int amountOfBadCards = 0;
 
+    public MovePresident movePresidentScript;
+    int randomPolicy = 0;
+
     // Update is called once per frame
     void Update()
     {
@@ -35,15 +38,19 @@ public class PolicyTracker : MonoBehaviour
         {
             choseACard = true;
         }
-        if (choseACard)
+        if (choseACard || movePresidentScript.chippyFlippedPolicy)
         {
+            if (movePresidentScript.chippyFlippedPolicy)
+            {
+                randomPolicy = Random.Range(1, 3);
+            }
             KeepTrackOfPolicys();
         }
     }
 
     public void KeepTrackOfPolicys()
     {
-        if (testingChosenCard.CompareTag("BadCard"))
+        if (testingChosenCard.CompareTag("BadCard") || randomPolicy == 1)
         {
             amountOfBadCards++;
 
@@ -51,35 +58,47 @@ public class PolicyTracker : MonoBehaviour
             {
                 bad1.SetActive(true);
                 choseACard = false;
+                randomPolicy = 0;
+                movePresidentScript.chippyFlippedPolicy = false;
             }
             if (amountOfBadCards == 2)
             {
                 bad2.SetActive(true);
                 choseACard = false;
+                randomPolicy = 0;
+                movePresidentScript.chippyFlippedPolicy = false;
             }
             if (amountOfBadCards == 3)
             {
                 bad3.SetActive(true);
                 choseACard = false;
+                randomPolicy = 0;
+                movePresidentScript.chippyFlippedPolicy = false;
             }
             if (amountOfBadCards == 4)
             {
                 bad4.SetActive(true);
                 choseACard = false;
+                randomPolicy = 0;
+                movePresidentScript.chippyFlippedPolicy = false;
             }
             if (amountOfBadCards == 5)
             {
                 bad5.SetActive(true);
                 choseACard = false;
+                randomPolicy = 0;
+                movePresidentScript.chippyFlippedPolicy = false;
             }
             if (amountOfBadCards == 6)
             {
                 bad6.SetActive(true);
                 choseACard = false;
+                randomPolicy = 0;
+                movePresidentScript.chippyFlippedPolicy = false;
                 print("bad guys win");
             }
         }
-        if (testingChosenCard.CompareTag("GoodCard"))
+        if (testingChosenCard.CompareTag("GoodCard") || randomPolicy == 2)
         {
             amountOfGoodCards++;
 
@@ -87,26 +106,36 @@ public class PolicyTracker : MonoBehaviour
             {
                 good1.SetActive(true);
                 choseACard = false;
+                randomPolicy = 0;
+                movePresidentScript.chippyFlippedPolicy = false;
             }
             if (amountOfGoodCards == 2)
             {
                 good2.SetActive(true);
                 choseACard = false;
+                randomPolicy = 0;
+                movePresidentScript.chippyFlippedPolicy = false;
             }
             if (amountOfGoodCards == 3)
             {
                 good3.SetActive(true);
                 choseACard = false;
+                randomPolicy = 0;
+                movePresidentScript.chippyFlippedPolicy = false;
             }
             if (amountOfGoodCards == 4)
             {
                 good4.SetActive(true);
                 choseACard = false;
+                randomPolicy = 0;
+                movePresidentScript.chippyFlippedPolicy = false;
             }
             if (amountOfGoodCards == 5)
             {
                 good5.SetActive(true);
                 choseACard = false;
+                randomPolicy = 0;
+                movePresidentScript.chippyFlippedPolicy = false;
                 print("good guys win");
             }
         }
