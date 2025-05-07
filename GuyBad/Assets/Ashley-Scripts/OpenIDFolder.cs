@@ -34,7 +34,6 @@ public class OpenIDFolder : MonoBehaviour , IPointerEnterHandler, IPointerExitHa
     {
         if (eventData.pointerEnter == folder)
         {
-            print("you opened your ID");
 
             if (moveCoroutine != null)
             {
@@ -50,7 +49,6 @@ public class OpenIDFolder : MonoBehaviour , IPointerEnterHandler, IPointerExitHa
     {
         if (eventData.pointerEnter == folder)
         {
-            print("your ID is closed");
 
             if (moveCoroutine != null)
             {

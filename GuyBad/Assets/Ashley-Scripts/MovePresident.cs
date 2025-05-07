@@ -38,7 +38,6 @@ public class MovePresident : MonoBehaviour
             {
                 Movement();
                 hasMovedForObject[i] = true;
-                print($"Moved for object {policyCards[i].name}");
             }
         }
 
@@ -60,7 +59,6 @@ public class MovePresident : MonoBehaviour
                 {
                     //this will change along with different logic
                     chippyMoves++;
-                    print("this is neinVote, chippymoves = " + chippyMoves);
                 }
             }
         }
@@ -83,7 +81,6 @@ public class MovePresident : MonoBehaviour
             
             if (!hasFlippedPolicy)
             {
-                print("flip new policy");
                 chippyFlippedPolicy = true;
                 hasFlippedPolicy = true;
                 StartCoroutine(PauseChippy(2f));
@@ -111,6 +108,5 @@ public class MovePresident : MonoBehaviour
         yield return new WaitForSeconds(delay);
         chippyMoves = 0;
         hasFlippedPolicy = false;
-        print("chippy is reset");
     }
 }

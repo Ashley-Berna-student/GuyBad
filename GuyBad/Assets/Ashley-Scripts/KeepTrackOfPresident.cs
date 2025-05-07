@@ -86,7 +86,6 @@ public class KeepTrackOfPresident : MonoBehaviour
                 if (currentChancellor != null)
                 {
                     currentChancellor.tag = "Player";
-                    print($"{lastPresident.name} is no longer the President");
                 }
                 else
                 {
@@ -95,7 +94,6 @@ public class KeepTrackOfPresident : MonoBehaviour
             }
 
             newPresident.tag = "President";
-            print($"{newPresident.name} is now the President");
             PlayerListItemUI.ResetChancellorChoice();
             lastPresident = newPresident;
         }
