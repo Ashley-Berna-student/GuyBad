@@ -23,7 +23,7 @@ namespace GuyBad
             }
         }
 
-        void OnGUI()
+        /*void OnGUI()
         {
             GUILayout.BeginArea(new Rect(10, 10, 300, 300));
             if (!m_NetworkManager.IsClient && !m_NetworkManager.IsServer)
@@ -37,7 +37,7 @@ namespace GuyBad
             }
 
             GUILayout.EndArea();
-        }
+        }*/
 
         void StartButtons()
         {
@@ -84,6 +84,21 @@ namespace GuyBad
             GUILayout.Label("Transport: " +
                 m_NetworkManager.NetworkConfig.NetworkTransport.GetType().Name);
             GUILayout.Label("Mode: " + mode);
+        }
+
+        public void OnClickHost()
+        {
+            _ = StartHostWithRelay();
+        }
+
+        public void OnClickClient(string joinCode)
+        {
+            _ = StartClientWithRelay(joinCode);
+        }
+
+        public void OnClickServer()
+        {
+            m_NetworkManager.StartServer();
         }
     }
 }
