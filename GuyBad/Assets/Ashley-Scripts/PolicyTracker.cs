@@ -43,6 +43,7 @@ public class PolicyTracker : MonoBehaviour
             if (movePresidentScript.chippyFlippedPolicy)
             {
                 randomPolicy = Random.Range(1, 3);
+                print("random policy will be chosen");
             }
             KeepTrackOfPolicys();
         }

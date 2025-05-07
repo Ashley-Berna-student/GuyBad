@@ -41,66 +41,55 @@ public class Shooting : MonoBehaviour
             shootPlayer = true;
             GetRandomObject();
             alreadyShot = false;
-            print("President can shoot now");
         }
         if(Input.GetKeyDown(KeyCode.A))
         {
             currentTarget = location1;
-            print("location = 1");
             Shoot();
         }
         if(Input.GetKeyDown(KeyCode.B))
         {
             currentTarget = location2;
-            print("location = 2");
             Shoot();
         }
         if (Input.GetKeyDown(KeyCode.C))
         {
             currentTarget = location3;
-            print("location = 3");
             Shoot();
         }
         if (Input.GetKeyDown(KeyCode.D))
         {
             currentTarget = location4;
-            print("location = 4");
             Shoot();
         }
         if (Input.GetKeyDown(KeyCode.E))
         {
             currentTarget = location5;
-            print("location = 5");
             Shoot();
         }
         if (Input.GetKeyDown(KeyCode.F))
         {
             currentTarget = location6;
-            print("location = 6");
             Shoot();
         }
         if (Input.GetKeyDown(KeyCode.G))
         {
             currentTarget = location7;
-            print("location = 7");
             Shoot();
         }
         if (Input.GetKeyDown(KeyCode.H))
         {
             currentTarget = location8;
-            print("location = 8");
             Shoot();
         }
         if (Input.GetKeyDown(KeyCode.I))
         {
             currentTarget = location9;
-            print("location = 9");
             Shoot();
         }
         if (Input.GetKeyDown(KeyCode.J))
         {
             currentTarget = location10;
-            print("location = 10");
             Shoot();
         }
 
@@ -141,7 +130,6 @@ public class Shooting : MonoBehaviour
             shootPlayer = false;
             alreadyShot = true;
             StartCoroutine(DeactivateRayGun());
-            print("president cannot shoot now");
         }
     }
 

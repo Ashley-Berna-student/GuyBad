@@ -23,6 +23,7 @@ public class MovePresident : MonoBehaviour
     public GameObject[] policyCards;
     private bool[] hasMovedForObject;
     public bool chippyFlippedPolicy = false;
+    private bool hasFlippedPolicy = false;
 
     void Start()
     {
@@ -37,7 +38,6 @@ public class MovePresident : MonoBehaviour
             {
                 Movement();
                 hasMovedForObject[i] = true;
-                print($"Moved for object {policyCards[i].name}");
             }
         }
 
@@ -59,7 +59,6 @@ public class MovePresident : MonoBehaviour
                 {
                     //this will change along with different logic
                     chippyMoves++;
-                    print("this is neinVote, chippymoves = " + chippyMoves);
                 }
             }
         }
@@ -79,9 +78,13 @@ public class MovePresident : MonoBehaviour
         if (chippyMoves == 3)
         {
             chippyrb.MovePosition(pos4.position);
-            print("flip new policy");
-            chippyFlippedPolicy = true;
-            StartCoroutine(PauseChippy(2f));
+            
+            if (!hasFlippedPolicy)
+            {
+                chippyFlippedPolicy = true;
+                hasFlippedPolicy = true;
+                StartCoroutine(PauseChippy(2f));
+            }
         }
     }
 
@@ -104,6 +107,6 @@ public class MovePresident : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
         chippyMoves = 0;
-        print("chippy is reset");
+        hasFlippedPolicy = false;
     }
 }
