@@ -132,7 +132,7 @@ GameObject:
   - component: {fileID: 57638337}
   - component: {fileID: 57638338}
   m_Layer: 0
-  m_Name: GameObject (1)
+  m_Name: GameMangerForVoting
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -501,7 +501,7 @@ GameObject:
   - component: {fileID: 1000359112}
   - component: {fileID: 1000359110}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: GameManagerForVoting2
   m_TagString: VoteManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -519,6 +519,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe675a2224dfb9b4696ca6d9942f0753, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  voteint:
+    m_InternalValue: 0
+  voteNein:
+    m_InternalValue: 0
   time: 10
   txt: {fileID: 1649449875}
 --- !u!4 &1000359111
@@ -1870,10 +1874,10 @@ SceneRoots:
   m_Roots:
   - {fileID: 1679355029}
   - {fileID: 2113905998}
-  - {fileID: 2017350875}
   - {fileID: 1653559657}
+  - {fileID: 2017350875}
   - {fileID: 1717360599}
   - {fileID: 1000359111}
+  - {fileID: 57638336}
   - {fileID: 277949952}
   - {fileID: 2030234918}
-  - {fileID: 57638336}
