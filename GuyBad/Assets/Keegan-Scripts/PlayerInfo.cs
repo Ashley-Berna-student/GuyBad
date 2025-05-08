@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Unity.Netcode;
 using Unity.Collections;
+using UnityEngine.UI;
 
 public class PlayerInfo : NetworkBehaviour
 {
@@ -27,6 +28,17 @@ public class PlayerInfo : NetworkBehaviour
                 if (listManager != null && PlayerListManager.Instance == null)
                 {
                     listManager.StartCoroutine(listManager.WaitForCanvasAndAssignContainer());
+                }
+
+                if (IsHost)
+                {
+                    var joinCodeText = ui.transform.Find("JoinCodeText")?.GetComponent<Text>();
+                    if (joinCodeText != null)
+                    {
+                        string code = PlayerPrefs.GetString("RelayJoinCode", "N/A");
+                        joinCodeText.text = "Join Code: " + code;
+                        joinCodeText.gameObject.SetActive(true);
+                    }
                 }
             }
         }
