@@ -83,7 +83,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 2781988198
+  GlobalObjectIdHash: 2431951139
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -241,7 +241,7 @@ MonoBehaviour:
         byte0059: 0
         byte0060: 0
         byte0061: 0
-  playerUIPrefab: {fileID: 1485336306457120815, guid: d933d0eceaf4db34681dafed9c74a3dc, type: 3}
+  playerUIPrefab: {fileID: 8786785015106256865, guid: aa458ed09e3055f4fa21265612999216, type: 3}
   nameLabel: {fileID: 6575829843315808557}
 --- !u!1 &5752639749213134736
 GameObject:
