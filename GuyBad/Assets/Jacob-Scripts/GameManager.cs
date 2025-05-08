@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.Linq;
 using Unity.Netcode;
+using Unity.VisualScripting;
 using UnityEngine;
 using static Player;
 
@@ -51,6 +52,10 @@ public class GameManager : NetworkBehaviour
             }
             Debug.Log(temp.role.Value.ToString());
         }
+    }
+    public void AssignPresident()
+    {
+
     }
 }
 
