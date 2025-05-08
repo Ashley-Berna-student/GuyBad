@@ -16,9 +16,9 @@ public class Player : NetworkBehaviour
         GuyBad
     }
     [SerializeField] public GameObject playerCapsule;
-    public Color playerColor = Color.red;
     [SerializeField] public NetworkVariable<roles> role = new NetworkVariable<roles>(roles.None, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
     public string playerName;
+    public GameObject highlight;
     public bool president = false;
     public bool chancellor = false;
     //[SerializeField] private Text roleText;
@@ -52,7 +52,14 @@ public class Player : NetworkBehaviour
         {
             return;
         }
+
+
         
+    }
+
+    private void OnColorChanged(Color oldColor, Color newColor)
+    {
+        playerCapsule.GetComponent<MeshRenderer>().material.color = newColor;
     }
     //[Rpc(SendTo.ClientsAndHost)]
    /* public void SetColorRpc()

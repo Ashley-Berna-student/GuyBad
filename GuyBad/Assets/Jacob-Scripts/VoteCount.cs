@@ -48,7 +48,7 @@ public class VoteCount : NetworkBehaviour
         }
         else
         {
-            time = 10f;
+            time = 10f; 
             voteint.Value = 0;
             voteNein.Value = 0;
         }
