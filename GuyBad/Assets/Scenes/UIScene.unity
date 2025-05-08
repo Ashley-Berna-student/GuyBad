@@ -1540,9 +1540,33 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5416433766632711069, guid: cb41a0d492da1aa4499d5b1871f3ae03, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5416433766632711069, guid: cb41a0d492da1aa4499d5b1871f3ae03, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5416433766632711069, guid: cb41a0d492da1aa4499d5b1871f3ae03, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6295662354887182205, guid: cb41a0d492da1aa4499d5b1871f3ae03, type: 3}
       propertyPath: m_Name
       value: Liberal#2Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 6665857572126503837, guid: cb41a0d492da1aa4499d5b1871f3ae03, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6665857572126503837, guid: cb41a0d492da1aa4499d5b1871f3ae03, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6665857572126503837, guid: cb41a0d492da1aa4499d5b1871f3ae03, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7072595277636853432, guid: cb41a0d492da1aa4499d5b1871f3ae03, type: 3}
       propertyPath: m_IsActive
