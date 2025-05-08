@@ -25,9 +25,34 @@ public class MovePresident : MonoBehaviour
     public bool chippyFlippedPolicy = false;
     private bool hasFlippedPolicy = false;
 
+    public VoteCount voteCount;
+
     void Start()
     {
         hasMovedForObject = new bool[policyCards.Length];
+    }
+
+    void OnEnable()
+    {
+        VoteCount.OnVotingEnded += OnVoteResolved;
+    }
+
+    void OnDisable()
+    {
+        VoteCount.OnVotingEnded -= OnVoteResolved;
+    }
+
+    void OnVoteResolved(bool voteFailed)
+    {
+        if (voteFailed)
+        {
+            chippyMoves++;
+            print("chippy has moved");
+        }
+        else
+        {
+            print("chippy will not move");
+        }
     }
 
     void Update()
@@ -54,12 +79,6 @@ public class MovePresident : MonoBehaviour
             {
                 moving = false;
                 currentTargetIndex++;
-
-                if (!voteIsNein)
-                {
-                    //this will change along with different logic
-                    chippyMoves++;
-                }
             }
         }
 
