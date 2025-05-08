@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: ef9add2911013604d98c94773b6b8735
+timeCreated: 1507209587
+licenseType: Store
+TextScriptImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 112263
+  packageName: Croissants Pack
+  packageVersion: 1.0
+  assetPath: Assets/Croissants_Pack/Documentation/Naming_convention.txt
+  uploadId: 284520
