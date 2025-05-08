@@ -23,9 +23,12 @@ public class ChoosePolicyCard : MonoBehaviour
     }
     public void PickACard()
     {
-        policyCards = GameObject.FindGameObjectsWithTag("card");
+        GameObject[] goodCards = GameObject.FindGameObjectsWithTag("GoodCard");
+        GameObject[] badCards = GameObject.FindGameObjectsWithTag("BadCard");
 
-        List<GameObject> availableCards = new List<GameObject>(policyCards);
+        List<GameObject> availableCards = new List<GameObject>();
+        availableCards.AddRange(goodCards);
+        availableCards.AddRange(badCards);
         selectedCards.Clear();
 
         for (int i = 0; i < 3; i++)

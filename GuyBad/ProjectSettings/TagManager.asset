@@ -11,6 +11,11 @@ TagManager:
   - card
   - BowlingBall
   - RayGun
+  - President
+  - BadCard
+  - GoodCard
+  - Chancellor
+  - PlayerUI
   layers:
   - Default
   - TransparentFX

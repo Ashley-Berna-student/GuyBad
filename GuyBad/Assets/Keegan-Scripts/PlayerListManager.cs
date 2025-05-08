@@ -115,7 +115,7 @@ public class PlayerListManager : MonoBehaviour
 
         while (canvas == null)
         {
-            canvas = GameObject.Find("Testing canvas(Clone)");
+            canvas = GameObject.FindGameObjectWithTag("PlayerUI");
             yield return null;
         }
 
@@ -146,33 +146,11 @@ public class PlayerListManager : MonoBehaviour
         PlayerInfo[] allPlayers = FindObjectsOfType<PlayerInfo>();
         foreach (var player in allPlayers)
         {
-            if (!string.IsNullOrEmpty(player.playerName.Value.ToString()))
+            if (!string.IsNullOrEmpty(player.playerName.Value.ToString()) && player.isAlive.Value)
             {
                 AddPlayerToList(player.OwnerClientId);
             }
         }
-
-        /*if (!NetworkManager.Singleton.IsServer)
-        {
-            foreach (var info in FindObjectsOfType<PlayerInfo>())
-            {
-                if (!string.IsNullOrEmpty(info.playerName.Value.ToString()))
-                {
-                    AddPlayerToList(info.OwnerClientId);
-                }
-            }
-        }
-
-        else
-        {
-            foreach (var obj in GameObject.FindObjectsOfType<PlayerInfo>())
-            {
-                if (!string.IsNullOrEmpty(obj.playerName.Value.ToString()))
-                {
-                    AddPlayerToList(obj.OwnerClientId);
-                }
-            }
-        }*/
     }
 
     public static void UpdateAllPlayerLists()
@@ -215,5 +193,14 @@ public class PlayerListManager : MonoBehaviour
 
         //Add logic for what happens here
 
+    }
+
+    public void RemovePlayerFromList(ulong clientId)
+    {
+        if (playerListItems.TryGetValue(clientId, out GameObject item))
+        {
+            Destroy(item);
+            playerListItems.Remove(clientId);
+        }
     }
 }

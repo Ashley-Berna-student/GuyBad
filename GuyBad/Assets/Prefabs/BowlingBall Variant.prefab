@@ -255,4 +255,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   particles: {fileID: 5568252971567053606}
-  timeBeforeExploding: 0.9
+  timeBeforeExploding: 0.2
