@@ -7,43 +7,42 @@ public class DisableAndEnableScripts : MonoBehaviour
 {
     private PlayerMovement player;
     private LobbyUIHandler uiHandler;
+    private string currentScene = "";
 
     void Awake()
     {
         player = GetComponent<PlayerMovement>();
         uiHandler = GetComponent<LobbyUIHandler>();
-
-        SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
-    void OnDestroy()
+    void Update()
     {
-        SceneManager.sceneLoaded -= OnSceneLoaded;
-    }
+        string activeScene = SceneManager.GetActiveScene().name;
 
-    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
-        if (scene.name == "Lobby")
+        if (activeScene != currentScene)
         {
-            if (player != null)
-            {
-                player.enabled = true;
-            }
-            if (uiHandler != null)
-            {
-                uiHandler.enabled = true;
-            }
+            currentScene = activeScene;
+            HandleSceneChange(currentScene);
+        }
+    }
+
+    private void HandleSceneChange(string sceneName)
+    {
+        if (sceneName == "Lobby")
+        {
+            if (player != null) player.enabled = true;
+            if (uiHandler != null) uiHandler.enabled = true;
         }
         else
         {
-            if (player != null)
-            {
-                player.enabled = false;
-            }
-            if (uiHandler != null)
-            {
-                uiHandler.enabled = false;
-            }
+            if (player != null) player.enabled = false;
+            if (uiHandler != null) uiHandler.enabled = false;
+        }
+
+        if (sceneName == "GameScene")
+        {
+            Rigidbody rb = GetComponent<Rigidbody>();
+            if (rb != null) Destroy(rb);
         }
     }
 }

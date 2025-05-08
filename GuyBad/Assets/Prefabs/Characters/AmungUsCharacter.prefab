@@ -219,7 +219,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 3297405686
+  GlobalObjectIdHash: 533700423
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -240,8 +240,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c1f226dfcb03a0418b76433e66b6847, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sensX: 800
-  sensY: 800
+  sensX: 100
+  sensY: 100
   orientation: {fileID: 478211366338046060}
   rotateSpeed: 10
 --- !u!114 &938830245197150551
