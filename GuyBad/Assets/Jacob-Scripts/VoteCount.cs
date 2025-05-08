@@ -10,11 +10,14 @@ public class VoteCount : NetworkBehaviour
 {
     private NetworkVariable<int> voteint = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
     private NetworkVariable<int> voteNein = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+    [SerializeField] public UIManager uiManager; 
     private  NetworkVariable<bool> isStarted = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
     [SerializeField] public float time = 5f;
     [SerializeField] private Text txt;
     // Start is called before the first frame update
     // Update is called once per frame
+
+    //On NetworkSpawn runs when a networkprefab is instantiated into the game
     public override void OnNetworkSpawn()
     {
         voteint.OnValueChanged += (int previousValue, int newValue) =>
@@ -26,14 +29,14 @@ public class VoteCount : NetworkBehaviour
             Debug.Log(OwnerClientId + ";  randomNumber: " + voteNein.Value);
         };
         isStarted.OnValueChanged += (bool previousval, bool newVal) => {
+
             Debug.Log(OwnerClientId + ";  isStarted: " + isStarted.Value.ToString());
         };
     }
-    /*[Rpc(SendTo.ClientsAndHost)]
-    public void TestRpc()
-    { 
-        Debug.Log(voteint.Value);
-    }*/
+    private void Start()
+    {
+        uiManager = GetComponent<UIManager>();
+    }
     void Update()
     {
         if (isStarted.Value)
@@ -43,6 +46,10 @@ public class VoteCount : NetworkBehaviour
             if(countdown <= 0)
             {
                 TimerRpc();
+                if (voteNein.Value >= voteint.Value)
+                {
+                    uiManager.GivePresidentCards();
+                }
                 time = 10f;
             }
         }
