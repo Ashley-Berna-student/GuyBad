@@ -40,6 +40,7 @@ public class Player : NetworkBehaviour
         }*/
     }
     // Start is called before the first frame update
+    //On NetworkSpawn runs when a networkprefab is instantiated into the game
     public override void OnNetworkSpawn()
     {
         if (IsOwner)

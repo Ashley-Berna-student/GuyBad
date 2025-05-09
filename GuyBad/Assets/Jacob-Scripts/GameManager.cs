@@ -9,18 +9,78 @@ using static Player;
 
 public class GameManager : NetworkBehaviour
 {
+    private Queue<Player> q = new Queue<Player>();
 
     // Start is called before the first frame update
     public override void OnNetworkSpawn()
     {
         if (IsOwner)
         {
+
             AssignRole();
         }
         else
         {
             return;
         }
+    }
+    private void Update()
+    {
+        if (IsServer)
+        {
+            AssignRandomPresidentRpc();
+        }
+    }
+    private Queue<Player> playerQueue = new Queue<Player>();
+
+    private void Start()
+    {
+        NetworkManager.Singleton.OnClientConnectedCallback += OnClientConnected;
+    }
+
+    private void OnDestroy()
+    {
+        if (NetworkManager.Singleton != null)
+        {
+            NetworkManager.Singleton.OnClientConnectedCallback -= OnClientConnected;
+        }
+    }
+
+    private void OnClientConnected(ulong clientId)
+    {
+        Player playerScript = GetPlayer(clientId);
+        if (playerScript != null)
+        {
+            EnqueuePlayer(playerScript);
+        }
+    }
+
+    private Player GetPlayer(ulong clientId)
+    {
+        NetworkObject playerObject = NetworkManager.Singleton.ConnectedClients[clientId].PlayerObject;
+        return playerObject != null ? playerObject.GetComponent<Player>() : null;
+    }
+
+    private void EnqueuePlayer(Player playerScript)
+    {
+        playerQueue.Enqueue(playerScript);
+        Debug.Log($"Player {playerScript.name} enqueued.");
+    }
+
+    public Player DequeuePlayer()
+    {
+        if (playerQueue.Count > 0)
+        {
+            Player playerScript = playerQueue.Dequeue();
+            Debug.Log($"Player {playerScript.name} dequeued.");
+            return playerScript;
+        }
+        return null;
+    }
+
+    public int GetQueueCount()
+    {
+        return playerQueue.Count;
     }
     public void AssignRole()
     {
@@ -53,9 +113,16 @@ public class GameManager : NetworkBehaviour
             Debug.Log(temp.role.Value.ToString());
         }
     }
-    public void AssignPresident()
+    [Rpc(SendTo.ClientsAndHost)]
+    public void AssignRandomPresidentRpc()
     {
-
+        if (playerQueue.Count == 5)
+        {
+            Player[] players = playerQueue.ToArray();
+            Player randomPlayer = players[Random.Range(0, players.Length)];
+            randomPlayer.president = true;
+            Debug.Log($"Player {randomPlayer.name} set as President.");
+        }
     }
 }
 
