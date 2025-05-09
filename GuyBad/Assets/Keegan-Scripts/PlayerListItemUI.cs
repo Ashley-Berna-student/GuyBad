@@ -14,6 +14,8 @@ public class PlayerListItemUI : MonoBehaviour
     private ulong clientId;
 
     public static event Action<ulong> OnPlayerSelected;
+
+    private static bool chancellorChosen = false;
     
     public void SetPlayer(ulong clientId)
     {
@@ -28,9 +30,35 @@ public class PlayerListItemUI : MonoBehaviour
 
     private void OnSelected()
     {
-        Debug.Log($"Player with clientId {clientId} selected");
+        if (chancellorChosen)
+        {
+            print("chancelor has already been chosen");
+            return;
+        }
+
+        foreach (var player in FindObjectsOfType<PlayerInfo>())
+        {
+            if (player.OwnerClientId == clientId)
+            {
+                if (player.gameObject.CompareTag("President"))
+                {
+                    player.gameObject.tag = "Chancellor";
+                    chancellorChosen = true;
+                    Debug.Log($"{player.gameObject.name} is now the chancellor");
+                }
+                else
+                {
+                    Debug.LogWarning($"{player.gameObject.name} is not the president, cannot assign chancellor");
+                }
+                break;
+            }
+        }
     }
 
+    public static void ResetChancellorChoice()
+    {
+        chancellorChosen = false;
+    }
     private IEnumerator WaitForPlayerName(ulong clientId)
     {
         PlayerInfo info = null;

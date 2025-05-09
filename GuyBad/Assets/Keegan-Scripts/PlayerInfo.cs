@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using Unity.Netcode;
 using Unity.Collections;
+using UnityEngine.UI;
 
 public class PlayerInfo : NetworkBehaviour
 {
+    public NetworkVariable<bool> isAlive = new NetworkVariable<bool>(true, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
     public NetworkVariable<FixedString64Bytes> playerName = new NetworkVariable<FixedString64Bytes>(writePerm: NetworkVariableWritePermission.Server);
     public GameObject playerUIPrefab;
     public TextMesh nameLabel;
@@ -27,11 +29,24 @@ public class PlayerInfo : NetworkBehaviour
                 {
                     listManager.StartCoroutine(listManager.WaitForCanvasAndAssignContainer());
                 }
+
+                if (IsHost)
+                {
+                    var joinCodeText = ui.transform.Find("JoinCodeText")?.GetComponent<Text>();
+                    if (joinCodeText != null)
+                    {
+                        string code = PlayerPrefs.GetString("RelayJoinCode", "N/A");
+                        joinCodeText.text = "Join Code: " + code;
+                        joinCodeText.gameObject.SetActive(true);
+                    }
+                }
             }
         }
 
         UpdateFloatingName(playerName.Value.ToString());
         playerName.OnValueChanged += OnPlayerNameChanged;
+
+        isAlive.OnValueChanged += OnAliveStateChanged;
 
         StartCoroutine(NotifyClientsDelayed());
     }
@@ -69,5 +84,21 @@ public class PlayerInfo : NetworkBehaviour
     private void OnDestroy()
     {
         playerName.OnValueChanged -= OnPlayerNameChanged;
+    }
+
+    public void killPlayer()
+    {
+        if (IsServer)
+        {
+            isAlive.Value = false;
+        }
+    }
+
+    private void OnAliveStateChanged(bool oldVal, bool newVal)
+    {
+        if (!newVal)
+        {
+            PlayerListManager.Instance?.RemovePlayerFromList(OwnerClientId);
+        }
     }
 }

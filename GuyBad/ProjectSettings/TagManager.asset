@@ -4,13 +4,15 @@
 TagManager:
   serializedVersion: 2
   tags:
-
-  - VoteManager
-  - TealPlayer
-  - Host
-  - card
   - BowlingBall
+  - PlayerUI
+  - President
   - RayGun
+  - VoteManager
+  - BadCard
+  - GoodCard
+  - Host
+  - Chancellor
   layers:
   - Default
   - TransparentFX

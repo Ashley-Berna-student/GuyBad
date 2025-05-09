@@ -8,9 +8,11 @@ using UnityEngine.UI;
 
 public class VoteCount : NetworkBehaviour
 {
+
     private NetworkVariable<int> voteint = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
     private NetworkVariable<int> voteNein = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
     [SerializeField] public UIManager uiManager; 
+
     private  NetworkVariable<bool> isStarted = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
     [SerializeField] public float time = 5f;
     [SerializeField] private Text txt;
@@ -46,24 +48,31 @@ public class VoteCount : NetworkBehaviour
             if(countdown <= 0)
             {
                 TimerRpc();
+
+                StartCoroutine(DelayedReset());
+
                 if (voteNein.Value >= voteint.Value)
                 {
                     uiManager.GivePresidentCards();
                 }
+
                 time = 10f;
             }
         }
         else
         {
-            time = 10f; 
-            voteint.Value = 0;
-            voteNein.Value = 0;
+            time = 10f;
         }
     }
+
+    public delegate void VotingEnded(bool votePassed);
+    public static event VotingEnded OnVotingEnded;
 
     [Rpc(SendTo.ClientsAndHost)]
     private void TimerRpc()
     {
+        bool result = voteNein.Value >= voteint.Value;
+        OnVotingEnded?.Invoke(result);
 
         Debug.Log("60 Seconds is Over");
         Debug.Log("Yes: " + voteint.Value);
@@ -109,6 +118,10 @@ public class VoteCount : NetworkBehaviour
         Debug.Log($"Received pong from server for ping {pingCount} and message {message}");
     }
 
-
-
+    private IEnumerator DelayedReset()
+    {
+        yield return new WaitForSeconds(2f);
+        voteint.Value = 0;
+        voteNein.Value = 0;
+    }
 }
