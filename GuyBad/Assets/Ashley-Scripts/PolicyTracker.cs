@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using Unity.Netcode;
 
-public class PolicyTracker : MonoBehaviour
+public class PolicyTracker : NetworkBehaviour
 {
     //good card locations:
     public GameObject good1;
@@ -97,6 +98,7 @@ public class PolicyTracker : MonoBehaviour
                 randomPolicy = 0;
                 movePresidentScript.chippyFlippedPolicy = false;
                 print("bad guys win");
+                ShowWinScreenClientRpc("Bad");
             }
         }
         if (testingChosenCard.CompareTag("GoodCard") || randomPolicy == 2)
@@ -138,7 +140,19 @@ public class PolicyTracker : MonoBehaviour
                 randomPolicy = 0;
                 movePresidentScript.chippyFlippedPolicy = false;
                 print("good guys win");
+                ShowWinScreenClientRpc("Good");
             }
+        }
+    }
+
+    [ClientRpc]
+    private void ShowWinScreenClientRpc(string team)
+    {
+        print("Called client rpc");
+        WinScreenController controller = FindObjectOfType<WinScreenController>();
+        if (controller  != null)
+        {
+            controller.ShowWinScreen(team);
         }
     }
 }
