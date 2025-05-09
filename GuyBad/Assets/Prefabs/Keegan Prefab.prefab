@@ -47,7 +47,7 @@ GameObject:
   - component: {fileID: 5017534914288504088}
   m_Layer: 0
   m_Name: Keegan Prefab
-  m_TagString: Untagged
+  m_TagString: President
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -121,8 +121,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerCapsule: {fileID: 6623702362281977163}
-  playerColor: {r: 0, g: 0, b: 0, a: 0}
+  role:
+    m_InternalValue: 0
   playerName: 
+  highlight: {fileID: 0}
+  president: 0
+  chancellor: 0
 --- !u!114 &7692588799082054604
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -166,6 +170,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f32c04170de7a94995d30e6ebcf4540, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isAlive:
+    m_InternalValue: 1
   playerName:
     m_InternalValue:
       utf8LengthInBytes: 0
@@ -235,7 +241,7 @@ MonoBehaviour:
         byte0059: 0
         byte0060: 0
         byte0061: 0
-  playerUIPrefab: {fileID: 8786785015106256865, guid: aa458ed09e3055f4fa21265612999216, type: 3}
+  playerUIPrefab: {fileID: 1485336306457120815, guid: 9dab6702a26764948b59cbfbd4f5199e, type: 3}
   nameLabel: {fileID: 6575829843315808557}
 --- !u!1 &5752639749213134736
 GameObject:

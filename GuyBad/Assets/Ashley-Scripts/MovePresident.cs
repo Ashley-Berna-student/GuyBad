@@ -20,8 +20,52 @@ public class MovePresident : MonoBehaviour
     private bool voteIsNein = false;
     private int currentTargetIndex = 0;
 
+    public GameObject[] policyCards;
+    private bool[] hasMovedForObject;
+    public bool chippyFlippedPolicy = false;
+    private bool hasFlippedPolicy = false;
+
+    public VoteCount voteCount;
+
+    void Start()
+    {
+        hasMovedForObject = new bool[policyCards.Length];
+    }
+
+    void OnEnable()
+    {
+        VoteCount.OnVotingEnded += OnVoteResolved;
+    }
+
+    void OnDisable()
+    {
+        VoteCount.OnVotingEnded -= OnVoteResolved;
+    }
+
+    void OnVoteResolved(bool voteFailed)
+    {
+        if (voteFailed)
+        {
+            chippyMoves++;
+            print("chippy has moved");
+        }
+        else
+        {
+            print("chippy will not move");
+        }
+    }
+
     void Update()
     {
+        for (int i = 0; i < policyCards.Length; i++)
+        {
+            if (policyCards[i].activeSelf && !hasMovedForObject[i])
+            {
+                Movement();
+                hasMovedForObject[i] = true;
+            }
+        }
+
         if (moving && currentTargetIndex < pos.Length)
         {
             Vector3 target = pos[currentTargetIndex].position;
@@ -35,13 +79,6 @@ public class MovePresident : MonoBehaviour
             {
                 moving = false;
                 currentTargetIndex++;
-
-                if (!voteIsNein)
-                {
-                    //this will change along with different logic
-                    chippyMoves++;
-                    print("this is neinVote, chippymoves = " + chippyMoves);
-                }
             }
         }
 
@@ -60,8 +97,13 @@ public class MovePresident : MonoBehaviour
         if (chippyMoves == 3)
         {
             chippyrb.MovePosition(pos4.position);
-            print("flip new policy");
-            StartCoroutine(PauseChippy(2f));//not working
+            
+            if (!hasFlippedPolicy)
+            {
+                chippyFlippedPolicy = true;
+                hasFlippedPolicy = true;
+                StartCoroutine(PauseChippy(2f));
+            }
         }
     }
 
@@ -84,6 +126,6 @@ public class MovePresident : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
         chippyMoves = 0;
-        print("chippy is reset");
+        hasFlippedPolicy = false;
     }
 }

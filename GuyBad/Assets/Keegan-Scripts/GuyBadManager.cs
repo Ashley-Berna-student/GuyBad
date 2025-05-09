@@ -1,6 +1,7 @@
 using UnityEngine;
 using Unity.Netcode;
 using System.Threading.Tasks;
+using UnityEngine.UI;
 
 namespace GuyBad
 {
@@ -10,6 +11,7 @@ namespace GuyBad
         public RelayConnector relayConnector;
         public GameObject soundManagerPrefab;
 
+        public InputField joinCodeField;
         private string joinCodeInput = "";
 
         void Awake()
@@ -23,7 +25,7 @@ namespace GuyBad
             }
         }
 
-        void OnGUI()
+        /*void OnGUI()
         {
             GUILayout.BeginArea(new Rect(10, 10, 300, 300));
             if (!m_NetworkManager.IsClient && !m_NetworkManager.IsServer)
@@ -34,26 +36,28 @@ namespace GuyBad
             else
             {
                 StatusLabels();
-                SubmitNewPosition();
             }
 
             GUILayout.EndArea();
-        }
+        }*/
 
-        void StartButtons()
+        /*void StartButtons()
         {
             if (GUILayout.Button("Host (Relay)")) _ = StartHostWithRelay();
             joinCodeInput = GUILayout.TextField(joinCodeInput, GUILayout.Width(200));
             if (GUILayout.Button("Client (Relay)")) _ = StartClientWithRelay(joinCodeInput);
             if (GUILayout.Button("Server (No Relay)")) m_NetworkManager.StartServer();
-        }
+        }*/
 
         async Task StartHostWithRelay()
         {
             if (relayConnector != null)
             {
                 string joinCode = await relayConnector.SetupRelayHost(9);
-                Debug.Log("Relay Join Code: " + joinCode);
+
+                PlayerPrefs.SetString("RelayJoinCode", joinCode);
+                PlayerPrefs.Save();
+
                 m_NetworkManager.StartHost();
             }
 
@@ -87,25 +91,22 @@ namespace GuyBad
             GUILayout.Label("Mode: " + mode);
         }
 
-        void SubmitNewPosition()
+        public void OnClickHost()
         {
-            if (GUILayout.Button(m_NetworkManager.IsServer ? "Move" : "Request Position Change"))
-            {
-                if (m_NetworkManager.IsServer && !m_NetworkManager.IsClient)
-                {
-                    foreach(ulong uid in m_NetworkManager.ConnectedClientsIds)
-                    {
-                        m_NetworkManager.SpawnManager.GetPlayerNetworkObject(uid).GetComponent<Player>();
-                    }
-                }
-
-                else
-                {
-                    var playerObject = m_NetworkManager.SpawnManager.GetLocalPlayerObject();
-                    var player = playerObject.GetComponent<Player>();
-                }
-            }
+            _ = StartHostWithRelay();
         }
+
+        public void OnClickServer()
+        {
+            m_NetworkManager.StartServer();
+        }
+
+        public void OnClickClientFromUI()
+        {
+            joinCodeInput = joinCodeField.text;
+            _ = StartClientWithRelay(joinCodeInput);
+        }
+
     }
 }
 
