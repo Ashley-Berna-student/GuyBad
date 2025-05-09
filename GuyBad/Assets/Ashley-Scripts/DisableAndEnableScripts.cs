@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Multiplayer.Samples.Utilities.ClientAuthority;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -9,10 +10,21 @@ public class DisableAndEnableScripts : MonoBehaviour
     private LobbyUIHandler uiHandler;
     private string currentScene = "";
 
+    //jacobs scripts
+    private Player jPlayer;
+    private ClientNetworkTransform jClientTransform;
+    private CameraController jCameraController;
+    private PresidentSelectg jPresidentSelect;
+
     void Awake()
     {
         player = GetComponent<PlayerMovement>();
         uiHandler = GetComponent<LobbyUIHandler>();
+
+        jPlayer = GetComponent<Player>();
+        jClientTransform = GetComponent<ClientNetworkTransform>();
+        jCameraController = GetComponent<CameraController>();
+        jPresidentSelect = GetComponent<PresidentSelectg>();
     }
 
     void Update()
@@ -32,6 +44,11 @@ public class DisableAndEnableScripts : MonoBehaviour
         {
             if (player != null) player.enabled = true;
             if (uiHandler != null) uiHandler.enabled = true;
+
+            if (jPlayer != null) jPlayer.enabled = false;
+            if (jClientTransform != null) jClientTransform.enabled = false;
+            if (jCameraController != null) jCameraController.enabled = false;
+            if (jPresidentSelect != null) jPresidentSelect.enabled = false;
         }
         else
         {
@@ -43,6 +60,12 @@ public class DisableAndEnableScripts : MonoBehaviour
         {
             Rigidbody rb = GetComponent<Rigidbody>();
             if (rb != null) Destroy(rb);
+
+
+            if (jPlayer != null) jPlayer.enabled = true;
+            if (jClientTransform != null) jClientTransform.enabled = true;
+            if (jCameraController != null) jCameraController.enabled = true;
+            if (jPresidentSelect != null) jPresidentSelect.enabled = true;
         }
     }
 }

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028331, g: 0.2257133, b: 0.3069217, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2200,9 +2200,10 @@ MonoBehaviour:
   NetworkConfig:
     ProtocolVersion: 0
     NetworkTransport: {fileID: 1331609783}
-    PlayerPrefab: {fileID: 1906070816980711924, guid: 26a64237a1074af4494cf57d18011864, type: 3}
+    PlayerPrefab: {fileID: 2449380527846941527, guid: 87112103708f7c642adbeff43edf5936, type: 3}
     Prefabs:
-      NetworkPrefabsLists: []
+      NetworkPrefabsLists:
+      - {fileID: 11400000, guid: 65d94bb95296cb54082945b57d6034d5, type: 2}
     TickRate: 30
     ClientConnectionBufferTimeout: 10
     ConnectionApproval: 0
@@ -2692,6 +2693,71 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1697234821}
   m_CullTransparentMesh: 1
+--- !u!1001 &1824976373
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2007856107305541426, guid: 66d97f9184ca7c840a91d3c2828600c2, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -2.248993
+      objectReference: {fileID: 0}
+    - target: {fileID: 2007856107305541426, guid: 66d97f9184ca7c840a91d3c2828600c2, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.35401678
+      objectReference: {fileID: 0}
+    - target: {fileID: 2007856107305541426, guid: 66d97f9184ca7c840a91d3c2828600c2, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 3.2682247
+      objectReference: {fileID: 0}
+    - target: {fileID: 2007856107305541426, guid: 66d97f9184ca7c840a91d3c2828600c2, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2007856107305541426, guid: 66d97f9184ca7c840a91d3c2828600c2, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2007856107305541426, guid: 66d97f9184ca7c840a91d3c2828600c2, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2007856107305541426, guid: 66d97f9184ca7c840a91d3c2828600c2, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2007856107305541426, guid: 66d97f9184ca7c840a91d3c2828600c2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2007856107305541426, guid: 66d97f9184ca7c840a91d3c2828600c2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2007856107305541426, guid: 66d97f9184ca7c840a91d3c2828600c2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3229172728522343148, guid: 66d97f9184ca7c840a91d3c2828600c2, type: 3}
+      propertyPath: m_Name
+      value: SceneLoader
+      objectReference: {fileID: 0}
+    - target: {fileID: 5668573809249397535, guid: 66d97f9184ca7c840a91d3c2828600c2, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 3425309953
+      objectReference: {fileID: 0}
+    - target: {fileID: 5668573809249397535, guid: 66d97f9184ca7c840a91d3c2828600c2, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 2929248950
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 66d97f9184ca7c840a91d3c2828600c2, type: 3}
 --- !u!1 &1825433135
 GameObject:
   m_ObjectHideFlags: 0
@@ -3169,3 +3235,4 @@ SceneRoots:
   - {fileID: 664641845}
   - {fileID: 659607765}
   - {fileID: 2069199396}
+  - {fileID: 1824976373}
