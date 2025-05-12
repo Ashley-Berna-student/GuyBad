@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Unity.Netcode;
 using Unity.Collections;
@@ -9,7 +8,6 @@ public class PlayerInfo : NetworkBehaviour
 {
     public NetworkVariable<bool> isAlive = new NetworkVariable<bool>(true, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
     public NetworkVariable<FixedString64Bytes> playerName = new NetworkVariable<FixedString64Bytes>(writePerm: NetworkVariableWritePermission.Server);
-    public GameObject playerUIPrefab;
     public TextMesh nameLabel;
 
     public override void OnNetworkSpawn()
@@ -18,29 +16,6 @@ public class PlayerInfo : NetworkBehaviour
         {
             string chosenName = PlayerName.player_name;
             SetPlayerNameServerRpc(chosenName);
-           
-
-            if (PlayerListManager.Instance != null)
-            {
-                GameObject ui = Instantiate(playerUIPrefab);
-
-                var listManager = ui.GetComponentInChildren<PlayerListManager>();
-                if (listManager != null && PlayerListManager.Instance == null)
-                {
-                    listManager.StartCoroutine(listManager.WaitForCanvasAndAssignContainer());
-                }
-
-                if (IsHost)
-                {
-                    var joinCodeText = ui.transform.Find("JoinCodeText")?.GetComponent<Text>();
-                    if (joinCodeText != null)
-                    {
-                        string code = PlayerPrefs.GetString("RelayJoinCode", "N/A");
-                        joinCodeText.text = "Join Code: " + code;
-                        joinCodeText.gameObject.SetActive(true);
-                    }
-                }
-            }
         }
 
         UpdateFloatingName(playerName.Value.ToString());
@@ -59,7 +34,6 @@ public class PlayerInfo : NetworkBehaviour
 
     IEnumerator NotifyClientsDelayed()
     {
-        // Slight delay to ensure playerName is set before UI rebuild
         yield return new WaitForSeconds(0.5f);
 
         if (PlayerListManager.Instance != null)

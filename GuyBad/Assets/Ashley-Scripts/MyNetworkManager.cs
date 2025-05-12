@@ -1,18 +1,37 @@
-using Unity.Netcode;
 using UnityEngine;
+using Unity.Netcode;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
-public class SceneAutoLoader : NetworkBehaviour
+public class MyNetworkManager1 : MonoBehaviour
 {
-    public string lobbySceneName = "Lobby";
+    [SerializeField] private string lobbySceneName = "LobbyScene"; // Replace with your actual lobby scene name
 
-    public override void OnNetworkSpawn()
+    private void Start()
     {
-        // Only run on the host
-        if (IsServer)
+        NetworkManager.Singleton.OnServerStarted += HandleServerStarted;
+    }
+
+    private void HandleServerStarted()
+    {
+        StartCoroutine(MoveToLobbyAfterDelay());
+    }
+
+    private IEnumerator MoveToLobbyAfterDelay()
+    {
+        yield return new WaitForSeconds(.1f); // Wait for 2 seconds before switching
+
+        if (NetworkManager.Singleton.IsServer)
         {
-            // Load Lobby scene for everyone
             NetworkManager.Singleton.SceneManager.LoadScene(lobbySceneName, LoadSceneMode.Single);
+        }
+    }
+
+    private void OnDestroy()
+    {
+        if (NetworkManager.Singleton != null)
+        {
+            NetworkManager.Singleton.OnServerStarted -= HandleServerStarted;
         }
     }
 }

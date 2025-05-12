@@ -49,6 +49,13 @@ public class DisableAndEnableScripts : MonoBehaviour
             if (jClientTransform != null) jClientTransform.enabled = false;
             if (jCameraController != null) jCameraController.enabled = false;
             if (jPresidentSelect != null) jPresidentSelect.enabled = false;
+
+            if (GetComponent<Rigidbody>() == null)
+            {
+                Rigidbody rb = gameObject.AddComponent<Rigidbody>();
+                rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
+                Debug.Log("Rigidbody added in Lobby scene");
+            }
         }
         else
         {

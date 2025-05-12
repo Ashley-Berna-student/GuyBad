@@ -41,6 +41,15 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
+        if (rb == null)
+        {
+            rb = GetComponent<Rigidbody>();
+            if (rb == null)
+            {
+                return;
+            }
+        }
+
         if (tealChar.activeSelf)
         {
             animator = animator1;
