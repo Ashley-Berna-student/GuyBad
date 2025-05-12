@@ -23,7 +23,7 @@ public class SendPlayersToGame : MonoBehaviour
 
     private void HandleClientConnected(ulong clientId)
     {
-        if (!sceneLoadStarted && NetworkManager.Singleton.ConnectedClientsList.Count == 10)
+        if (!sceneLoadStarted && NetworkManager.Singleton.ConnectedClientsList.Count == 2)
         {
             sceneLoadStarted = true;
             StartCoroutine(WaitAndStartGame());

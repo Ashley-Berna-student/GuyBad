@@ -1,55 +1,53 @@
-using NUnit.Framework.Constraints;
 using System.Collections;
-using System.Collections.Generic;
 using Unity.Netcode;
-using Unity.Networking;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class VoteCount : NetworkBehaviour
 {
-    public NetworkVariable<int> voteint = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
-    public NetworkVariable<int> voteNein = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
-    private  NetworkVariable<bool> isStarted = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
-    [SerializeField] public float time = 5f;
+    public NetworkVariable<int> voteint = new(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+    public NetworkVariable<int> voteNein = new(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+    private NetworkVariable<bool> isStarted = new(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+
+    [SerializeField] public float time = 10f;
     [SerializeField] private Text txt;
-    // Start is called before the first frame update
-    // Update is called once per frame
+
+    private MoveChancellor chooseChancellor; // Reference to other script
+    private float countdown;
+
     public override void OnNetworkSpawn()
     {
-        voteint.OnValueChanged += (int previousValue, int newValue) =>
-        {
-            Debug.Log(OwnerClientId + ";  randomNumber: " + voteint.Value);
-        };
-        voteNein.OnValueChanged += (int previousValue, int newValue) =>
-        {
-            Debug.Log(OwnerClientId + ";  randomNumber: " + voteNein.Value);
-        };
-        isStarted.OnValueChanged += (bool previousval, bool newVal) => {
-            Debug.Log(OwnerClientId + ";  isStarted: " + isStarted.Value.ToString());
-        };
+        chooseChancellor = FindObjectOfType<MoveChancellor>();
+
+        voteint.OnValueChanged += (prev, curr) =>
+            Debug.Log(OwnerClientId + " voteYes: " + voteint.Value);
+        voteNein.OnValueChanged += (prev, curr) =>
+            Debug.Log(OwnerClientId + " voteNo: " + voteNein.Value);
+        isStarted.OnValueChanged += (prev, curr) =>
+            Debug.Log(OwnerClientId + " isStarted: " + isStarted.Value);
     }
-    /*[Rpc(SendTo.ClientsAndHost)]
-    public void TestRpc()
-    { 
-        Debug.Log(voteint.Value);
-    }*/
+
     void Update()
     {
+        // Start timer if chancellor is chosen
+        if (!isStarted.Value && chooseChancellor != null && chooseChancellor.chancellorChosen)
+        {
+            if (!IsOwner) return; // Only the owner can start it
+            isStarted.Value = true;
+            chooseChancellor.chancellorChosen = false; // Reset flag so this only runs once
+            countdown = time;
+        }
+
         if (isStarted.Value)
         {
-            float countdown = time -= Time.deltaTime;
+            countdown -= Time.deltaTime;
             txt.text = countdown.ToString("F1");
-            if(countdown <= 0)
+
+            if (countdown <= 0)
             {
                 TimerRpc();
                 StartCoroutine(DelayedReset());
-                time = 10f;
             }
-        }
-        else
-        {
-            time = 10f;
         }
     }
 
@@ -62,48 +60,27 @@ public class VoteCount : NetworkBehaviour
         bool result = voteNein.Value >= voteint.Value;
         OnVotingEnded?.Invoke(result);
 
-        Debug.Log("60 Seconds is Over");
+        Debug.Log("Timer Ended");
         Debug.Log("Yes: " + voteint.Value);
         Debug.Log("No: " + voteNein.Value);
-        Debug.Log(time);
 
-            isStarted.Value = false;
-        
+        isStarted.Value = false;
     }
 
     [Rpc(SendTo.ClientsAndHost)]
     public void GetStartRpc(bool start)
     {
-        if (!IsOwner) { return; }
+        if (!IsOwner) return;
         isStarted.Value = start;
     }
+
     [Rpc(SendTo.Server)]
     public void GetVoteRpc(bool vote)
     {
-        if (!IsOwner) { return;}
-        if (vote)
-        {
-            voteint.Value += 1;
-        }
-        else
-        {
-            voteNein.Value += 1; // changed from -=
-        }
+        if (!IsOwner) return;
 
-    }
-    [Rpc(SendTo.Server)]
-    public void PingRpc(int pingCount)
-    {
-        // Server -> Clients because PongRpc sends to NotServer
-        // Note: This will send to all clients.
-        // Sending to the specific client that requested the pong will be discussed in the next section.
-        PongRpc(pingCount, "PONG!");
-    }
-
-    [Rpc(SendTo.NotServer)]
-    void PongRpc(int pingCount, string message)
-    {
-        Debug.Log($"Received pong from server for ping {pingCount} and message {message}");
+        if (vote) voteint.Value += 1;
+        else voteNein.Value += 1;
     }
 
     private IEnumerator DelayedReset()
