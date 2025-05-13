@@ -19,10 +19,6 @@ public class LobbyUIHandler : MonoBehaviour
     public AudioClip gaspSound;
     public AudioClip laughSound;
     public int sceneID = 1;
-    private bool isClapping = false;
-    private bool isGasping = false;
-    private bool isLaughing = false;
-    private bool leaveLobby = false;
 
     void Update()
     {
@@ -61,58 +57,6 @@ public class LobbyUIHandler : MonoBehaviour
             {
                 obj.SetActive(obj == selectedColor);
             }
-        }
-        if (colorName == clapButton.name)
-        {
-            isClapping = true;
-            PlaySound();
-            isClapping = false;
-        }
-        if (colorName == gaspButton.name)
-        {
-            isGasping = true;
-            PlaySound();
-            isGasping = false;
-        }
-        if (colorName == laughButton.name)
-        {
-            isLaughing = true;
-            PlaySound();
-            isLaughing = false;
-        }
-        if (colorName == doorButton.name && gameObject.CompareTag("Host"))
-        {
-            leaveLobby = true;
-            print("you are now leaving the lobby");
-            LeaveLobby();
-        }
-        else
-        {
-            print("invalid selection");
-        }
-    }
-
-    public void PlaySound()
-    {
-        if (isClapping)
-        {
-            AudioSource.PlayClipAtPoint(clapSound, transform.position);
-        }
-        if (isGasping)
-        {
-            AudioSource.PlayClipAtPoint(gaspSound, transform.position);
-        }
-        if (isLaughing)
-        {
-            AudioSource.PlayClipAtPoint(laughSound, transform.position);
-        }
-    }
-
-    public void LeaveLobby()
-    {
-        if (leaveLobby)
-        {
-            SceneManager.LoadScene(sceneID);
         }
     }
 }
