@@ -16,10 +16,10 @@ public class Player : NetworkBehaviour
         GuyBad
     }
     [SerializeField] public GameObject playerCapsule;
-    [SerializeField] public NetworkVariable<roles> role = new NetworkVariable<roles>(roles.None, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+    [SerializeField] public NetworkVariable<roles> role = new NetworkVariable<roles>(roles.None, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
     public string playerName;
     public GameObject highlight;
-    public bool president = false;
+    public NetworkVariable<bool> president = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
     public bool chancellor = false;
     //[SerializeField] private Text roleText;
    // private NetworkVariable<MeshRenderer> ma = new NetworkVariable<MeshRenderer>();
