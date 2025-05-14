@@ -1,8 +1,5 @@
-using NUnit.Framework.Constraints;
 using System.Collections;
-using System.Collections.Generic;
 using Unity.Netcode;
-using Unity.Networking;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -41,11 +38,21 @@ public class VoteCount : NetworkBehaviour
     }
     void Update()
     {
+        // Start timer if chancellor is chosen
+        if (!isStarted.Value && chooseChancellor != null && chooseChancellor.chancellorChosen)
+        {
+            if (!IsOwner) return; // Only the owner can start it
+            isStarted.Value = true;
+            chooseChancellor.chancellorChosen = false; // Reset flag so this only runs once
+            countdown = time;
+        }
+
         if (isStarted.Value)
         {
-            float countdown = time -= Time.deltaTime;
+            countdown -= Time.deltaTime;
             txt.text = countdown.ToString("F1");
-            if(countdown <= 0)
+
+            if (countdown <= 0)
             {
                 TimerRpc();
 
@@ -59,10 +66,6 @@ public class VoteCount : NetworkBehaviour
                 time = 10f;
             }
         }
-        else
-        {
-            time = 10f;
-        }
     }
 
     public delegate void VotingEnded(bool votePassed);
@@ -74,48 +77,27 @@ public class VoteCount : NetworkBehaviour
         bool result = voteNein.Value >= voteint.Value;
         OnVotingEnded?.Invoke(result);
 
-        Debug.Log("60 Seconds is Over");
+        Debug.Log("Timer Ended");
         Debug.Log("Yes: " + voteint.Value);
         Debug.Log("No: " + voteNein.Value);
-        Debug.Log(time);
 
-            isStarted.Value = false;
-        
+        isStarted.Value = false;
     }
 
     [Rpc(SendTo.ClientsAndHost)]
     public void GetStartRpc(bool start)
     {
-        if (!IsOwner) { return; }
+        if (!IsOwner) return;
         isStarted.Value = start;
     }
+
     [Rpc(SendTo.Server)]
     public void GetVoteRpc(bool vote)
     {
-        if (!IsOwner) { return;}
-        if (vote)
-        {
-            voteint.Value += 1;
-        }
-        else
-        {
-            voteNein.Value += 1; // changed from -=
-        }
+        if (!IsOwner) return;
 
-    }
-    [Rpc(SendTo.Server)]
-    public void PingRpc(int pingCount)
-    {
-        // Server -> Clients because PongRpc sends to NotServer
-        // Note: This will send to all clients.
-        // Sending to the specific client that requested the pong will be discussed in the next section.
-        PongRpc(pingCount, "PONG!");
-    }
-
-    [Rpc(SendTo.NotServer)]
-    void PongRpc(int pingCount, string message)
-    {
-        Debug.Log($"Received pong from server for ping {pingCount} and message {message}");
+        if (vote) voteint.Value += 1;
+        else voteNein.Value += 1;
     }
 
     private IEnumerator DelayedReset()

@@ -110,7 +110,6 @@ public class PlayerListManager : MonoBehaviour
     public IEnumerator WaitForCanvasAndAssignContainer()
     {
 
-
         GameObject canvas = null;
 
         while (canvas == null)

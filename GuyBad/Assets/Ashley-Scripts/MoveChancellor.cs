@@ -12,6 +12,8 @@ public class MoveChancellor : MonoBehaviour
 
     private Transform targetSignPosition;
 
+    public bool chancellorChosen = false;
+
     public void SetChancellor(GameObject chosenPlayer)
     {
         int closestIndex = GetClosestPositionIndex(chosenPlayer.transform.position);
@@ -24,6 +26,7 @@ public class MoveChancellor : MonoBehaviour
         {
             chancellorSign.position = Vector3.MoveTowards(chancellorSign.position, targetSignPosition.position, moveSpeed * Time.deltaTime);
             chancellorSign.rotation = Quaternion.RotateTowards(chancellorSign.rotation, targetSignPosition.rotation, rotateSpeed * Time.deltaTime); 
+            chancellorChosen = true;
         }
     }
 

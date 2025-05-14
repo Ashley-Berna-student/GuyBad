@@ -86,6 +86,7 @@ public class KeepTrackOfPresident : MonoBehaviour
                 if (currentChancellor != null)
                 {
                     currentChancellor.tag = "Player";
+                    print("chancler is reset");
                 }
                 else
                 {
