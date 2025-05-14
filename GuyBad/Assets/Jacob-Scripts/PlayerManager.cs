@@ -1,23 +1,28 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics.Contracts;
 using System.Linq;
 using Unity.Netcode;
-using Unity.VisualScripting;
 using UnityEngine;
 using static Player;
 
-public class GameManager : NetworkBehaviour
+public class PlayerManager : NetworkBehaviour
 {
-
-    // Start is called before the first frame update
+    [SerializeField] private GameManager gameManager;
+    int maxValue;
     public override void OnNetworkSpawn()
     {
-
     }
-    
     private void Update()
     {
+        if (IsServer)
+        {
+            if (playerQueue.Count == 3)
+            {
+                AssignRoleRpc();
+                AssignRandomPresidentRpc();
+            }
+        }
     }
     private List<Player> playerQueue = new List<Player>();
 
@@ -41,24 +46,12 @@ public class GameManager : NetworkBehaviour
         {
             EnqueuePlayer(playerScript);
         }
-        if (IsServer)
-        {
-            if (playerQueue.Count == 3)
-            {
-                AssignRoleRpc();
-                AssignRandomPresidentRpc();
-            }
-        }
     }
 
     private Player GetPlayer(ulong clientId)
     {
-        if (IsServer)
-        {
-            NetworkObject playerObject = NetworkManager.Singleton.ConnectedClients[clientId].PlayerObject;
-            return playerObject != null ? playerObject.GetComponent<Player>() : null;
-        }
-        return null;
+        NetworkObject playerObject = NetworkManager.Singleton.ConnectedClients[clientId].PlayerObject;
+        return playerObject != null ? playerObject.GetComponent<Player>() : null;
     }
 
     private void EnqueuePlayer(Player playerScript)
@@ -76,7 +69,6 @@ public class GameManager : NetworkBehaviour
     [Rpc(SendTo.ClientsAndHost)]
     public void AssignRoleRpc()
     {
-        if (!IsServer) { return; }
         List<Player> playersY = new List<Player>();
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
         int liberals = 0;
@@ -89,8 +81,8 @@ public class GameManager : NetworkBehaviour
         }
         for (int c = 0; c <= playersY.Count() - 1; c++)
         {
-            Player temp = playersY[Random.Range(0, playersY.Count())];
-            int r = Random.Range(0, 3);
+            Player temp = playersY[UnityEngine.Random.Range(0, playersY.Count())];
+            int r = UnityEngine.Random.Range(0, 3);
             if (r == 0 && liberals < 3)
             {
                 temp.role.Value = roles.Liberal;
@@ -109,23 +101,21 @@ public class GameManager : NetworkBehaviour
     [Rpc(SendTo.ClientsAndHost)]
     public void AssignRandomPresidentRpc()
     {
-        if (!IsServer) { return; }
         bool presidentExist = false;
         if (playerQueue.Count >= 3)
         {
             if (!presidentExist)
             {
                 Player[] players = playerQueue.ToArray();
-                Player randomPlayer = players[Random.Range(0, players.Length)];
+                Player randomPlayer = players[UnityEngine.Random.Range(0, players.Length)];
                 randomPlayer.president.Value = true;
                 Debug.Log($"Player {randomPlayer.name} set as President.");
+                presidentExist = true;
             }
             else
             {
                 return;
             }
-            presidentExist = true;
         }
     }
 }
-
